@@ -33,17 +33,17 @@ class HanjinParser(Parser):
 
             for tr in tracking_info:
                 tds = tr.find_all('td')
+                if len(tds) == 5:
+                    date = getattr(tds[0], 'get_text', '')(strip=True)
+                    time = getattr(tds[1], 'get_text', '')(strip=True)
+                    location = getattr(tds[2], 'get_text', '')(strip=True)
+                    status = getattr(tds[3], 'get_text', '')(strip=True)
+                    phone = getattr(tds[4], 'get_text', '')(strip=True)
 
-                date = getattr(tds[0], 'get_text', '')(strip=True)
-                time = getattr(tds[1], 'get_text', '')(strip=True)
-                location = getattr(tds[2], 'get_text', '')(strip=True)
-                status = getattr(tds[3], 'get_text', '')(strip=True)
-                phone = getattr(tds[4], 'get_text', '')(strip=True)
-
-                track = Track()
-                track.time = '%s %s' % (date, time)
-                track.location = location
-                track.status = status
-                track.phone1 = phone
-                self.add_track(track)
+                    track = Track()
+                    track.time = '%s %s' % (date, time)
+                    track.location = location
+                    track.status = status
+                    track.phone1 = phone
+                    self.add_track(track)
 
