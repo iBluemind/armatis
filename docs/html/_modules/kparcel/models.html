@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>kparcel.models &#8212; KParcel 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="KParcel 2.0.0 documentation" href="../../index.html" />
+    <link rel="up" title="kparcel" href="../kparcel.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for kparcel.models</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+<div class="viewcode-block" id="Company"><a class="viewcode-back" href="../../kparcel.html#kparcel.models.Company">[docs]</a><span class="k">class</span> <span class="nc">Company</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">digit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Company&#39;s name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span>  <span class="n">name</span>
+        <span class="c1"># Codename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+        <span class="c1"># The digit of the invoice number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digit</span> <span class="o">=</span> <span class="n">digit</span>
+        <span class="c1"># Phone number of the service center</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phone</span> <span class="o">=</span> <span class="n">phone</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phone</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Track"><a class="viewcode-back" href="../../kparcel.html#kparcel.models.Track">[docs]</a><span class="k">class</span> <span class="nc">Track</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">phone1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">phone2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="c1"># Location</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">location</span>
+        <span class="c1"># Status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+        <span class="c1"># Phone number 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phone1</span> <span class="o">=</span> <span class="n">phone1</span>
+        <span class="c1"># Phone number 2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phone2</span> <span class="o">=</span> <span class="n">phone2</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] </span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="s1"> / </span><span class="si">%s</span><span class="s1"> / </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phone1</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phone2</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Tracker"><a class="viewcode-back" href="../../kparcel.html#kparcel.models.Tracker">[docs]</a><span class="k">class</span> <span class="nc">Tracker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tracks</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tracks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tracks</span>
+
+<div class="viewcode-block" id="Tracker.add_track"><a class="viewcode-back" href="../../kparcel.html#kparcel.models.Tracker.add_track">[docs]</a>    <span class="k">def</span> <span class="nf">add_track</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_track</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_track</span><span class="p">,</span> <span class="n">Track</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The new_track must be Track!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tracks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_track</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Tracker.track_by_status"><a class="viewcode-back" href="../../kparcel.html#kparcel.models.Tracker.track_by_status">[docs]</a>    <span class="k">def</span> <span class="nf">track_by_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the tracking information matching the status</span>
+
+<span class="sd">        :param str status: The status to find the tracking information</span>
+<span class="sd">        :return: The tracking information matching the status</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tracks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tracks</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tracks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tracks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find the track by status </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">status</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">track</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tracks</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">track</span></div>
+
+
+<div class="viewcode-block" id="Parcel"><a class="viewcode-back" href="../../kparcel.html#kparcel.models.Parcel">[docs]</a><span class="k">class</span> <span class="nc">Parcel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">invoice_number</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">address</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">note</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># The sender&#39;s name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">sender</span>
+        <span class="c1"># The receiver&#39;s name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">receiver</span> <span class="o">=</span> <span class="n">receiver</span>
+        <span class="c1"># Invoice number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span> <span class="o">=</span> <span class="n">invoice_number</span>
+        <span class="c1"># The receiver&#39;s address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">address</span>
+        <span class="c1"># Note</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">note</span> <span class="o">=</span> <span class="n">note</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] From: </span><span class="si">%s</span><span class="s1">, To: </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">receiver</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">note</span>
+        <span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  <li><a href="../kparcel.html">kparcel</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Manjong Han.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
