@@ -15,11 +15,7 @@ class LogenParser(Parser):
                              'invoice=%s' % self.invoice_number
         self.parser_request = parser_request
 
-    def parser(self, doc):
-        return BeautifulSoup(doc, 'html5lib')
-
     def parse(self, parser, response):
-        response = response.decode('ms949', 'ignore')
         tracking_info = parser.find('tracking_info')
 
         sender_name = getattr(tracking_info.find('sender_name'), 'string', '')
