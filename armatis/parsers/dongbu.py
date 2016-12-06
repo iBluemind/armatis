@@ -16,8 +16,8 @@ class DongbuParser(Parser):
     def parse(self, parser, response):
         tables = parser.find_all('table', {'class': 'dv_list'})
 
-        basicTable = tables[0]
-        trs = basicTable.find_all('tr')
+        basic_table = tables[0]
+        trs = basic_table.find_all('tr')
         sender = getattr(trs[1].find_all('td')[0], 'string', '')
         receiver = getattr(trs[1].find_all('td')[1], 'string', '')
 
@@ -26,8 +26,8 @@ class DongbuParser(Parser):
         parcel.receiver = receiver
         self.parcel = parcel
 
-        trackTable = tables[1]
-        trs = trackTable.find_all('tr')
+        track_table = tables[1]
+        trs = track_table.find_all('tr')
 
         for tr in trs:
             tds = tr.find_all('td')

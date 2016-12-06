@@ -77,8 +77,8 @@ class Armatis(object):
         :param int invoice_number: The invoice number to find the parcel
         :return: The parser of the company
         """
-        company, parser = self.parser_manager[company_code]
-        return company, parser(invoice_number)
+        company, parser_cls = self.parser_manager[company_code]
+        return company, parser_cls(invoice_number)
 
     def supported_companies(self):
         """
@@ -87,7 +87,7 @@ class Armatis(object):
         :return: The list of company's name and company's parser code
         :rtype: dict
         """
-        return list({'name': k.name, 'code': k.code} for k, v in self.parser_manager)
+        return list({'name': k.name, 'code': k.code} for k, _ in self.parser_manager)
 
     def find(self, company_code=None, invoice_number=None):
         """

@@ -13,9 +13,9 @@ class KGBParser(Parser):
         self.parser_request = parser_request
 
     def parse(self, parser, response):
-        basicTable = parser.find('table', {'class': 'view'})
-        ths = basicTable.find_all('th')
-        tds = basicTable.find_all('td')
+        basic_table = parser.find('table', {'class': 'view'})
+        ths = basic_table.find_all('th')
+        tds = basic_table.find_all('td')
 
         sender_name = getattr(tds[1], 'string', '')
         memo = getattr(tds[2], 'string', '')
@@ -29,9 +29,9 @@ class KGBParser(Parser):
         parcel.note = memo
         self.parcel = parcel
 
-        trackTable = parser.find('table', {'class': 'list'})
-        cols = trackTable.find('thead').find('tr').find_all('th')
-        rows = trackTable.find('tbody').find_all('tr')
+        track_table = parser.find('table', {'class': 'list'})
+        cols = track_table.find('thead').find('tr').find_all('th')
+        rows = track_table.find('tbody').find_all('tr')
 
         for row in rows:
             tds = row.find_all('td')
