@@ -92,9 +92,9 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/KParcel.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/armatis.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/KParcel.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/armatis.qhc"
 
 .PHONY: applehelp
 applehelp:
@@ -111,8 +111,8 @@ devhelp:
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/KParcel"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/KParcel"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/armatis"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/armatis"
 	@echo "# devhelp"
 
 .PHONY: epub
