@@ -8,7 +8,7 @@ from contextlib import closing
 from weakref import WeakValueDictionary
 from bs4 import BeautifulSoup
 from kparcel.constants import PARSER_REQUEST_HEADER_USER_AGENT, \
-    PARSER_RESULT_PARCEL, PARSER_RESULT_TRACKS
+    TRACKING_RESULT_PARCEL, TRACKING_RESULT_TRACKS
 from kparcel.models import Parcel, Company, Tracker
 
 
@@ -22,16 +22,22 @@ class Source(object):
 
     @property
     def parcel(self):
-        return self.__parcel
+        return self._parcel
 
     @parcel.setter
     def parcel(self, parcel):
         if not isinstance(parcel, Parcel):
             raise TypeError('The parcel must be Parcel!')
-        self.__parcel = parcel
+        self._parcel = parcel
 
     def add_track(self, new_track):
         self.tracker.add_track(new_track)
+
+    def summary(self):
+        return {
+            TRACKING_RESULT_PARCEL: self.parcel,
+            TRACKING_RESULT_TRACKS: self.tracks
+        }
 
 
 class ParserRequest(object):
@@ -40,7 +46,7 @@ class ParserRequest(object):
         self.url = url
         # The body content for HTTP request
         self.body = body
-        # The header content for HTTP request
+        # The header for HTTP request
         self.header = header
         # Add an user agent of Internet Explorer
         self.header['User-Agent'] = PARSER_REQUEST_HEADER_USER_AGENT
@@ -50,15 +56,15 @@ class ParserRequest(object):
 class Parser(object):
     def __init__(self, invoice_number):
         self.source = Source()
-        self.__invoice_number = invoice_number
+        self._invoice_number = invoice_number
 
     @property
     def invoice_number(self):
-        return self.__invoice_number
+        return self._invoice_number
 
     @property
     def parser_request(self):
-        return self.__parser_request
+        return self._parser_request
 
     @parser_request.setter
     def parser_request(self, parser_request):
@@ -69,7 +75,7 @@ class Parser(object):
         """
         if not isinstance(parser_request, ParserRequest):
             raise TypeError('The parser_request must be ParserRequest!')
-        self.__parser_request = parser_request
+        self._parser_request = parser_request
 
     @property
     def parcel(self):
@@ -90,7 +96,7 @@ class Parser(object):
         pr = self.parser_request
         return urllib.request.Request(pr.url, pr.body, pr.header)
 
-    def fetch(self):
+    def _fetch(self):
         """
         Browsing the API request and return the response
         :return: The response of the API request
@@ -107,7 +113,7 @@ class Parser(object):
         :param parser: The module for parsing the response
         :param str response: The response of the API request
         """
-        raise NotImplemented('Please implement parse()!')
+        raise NotImplemented("Please implement the method 'parse'!")
 
     def parser(self, doc):
         """
@@ -117,7 +123,6 @@ class Parser(object):
         :return: The module for parsing the response
         """
         return BeautifulSoup(doc, 'lxml')
-
 
     def add_track(self, new_track):
         """
@@ -134,54 +139,19 @@ class Parser(object):
         :return: The found parcel and tracking informations
         :rtype: dict
         """
-        return {
-            PARSER_RESULT_PARCEL: self.source.parcel,
-            PARSER_RESULT_TRACKS: self.source.tracks
-        }
+        return self.source.summary()
+
+    def find(self):
+        response = self._fetch()
+        parser = self.parser(response)
+        self.parse(parser, response)
+        return self.result()
 
 
 class ParserManager(object):
     def __init__(self):
+        self._companies = {}
         self._parsers = WeakValueDictionary()
-
-    def __getitem__(self, company_code):
-        return self._parsers[company_code]
-
-    def __iter__(self):
-        for parser in self.parsers:
-            yield parser
-
-    def __len__(self):
-        return len(self._parsers)
-
-    @property
-    def parsers(self):
-        """
-        Get the parsers registered
-
-        :return: Registered parsers
-        :rtype: list
-        """
-        return self._parsers.values()
-
-    def parser(self, company_code, invoice_number):
-        """
-        Get the parser for specific company
-
-        :param str company_code: The company to find the parcel
-        :param int invoice_number: The invoice number to find the parcel
-        :return: The parser of the company
-        """
-        return self._parsers[company_code](invoice_number)
-
-    def supported_companies(self):
-        """
-        Registered parsers and companies
-
-        :return: The list of company's code and parser object
-        :rtype: dict
-        """
-        return dict((k, v) for k, v in self._parsers.items())
 
     def register_parser(self, company, new_parser):
         """
@@ -194,5 +164,22 @@ class ParserManager(object):
             raise TypeError('The company must be Company!')
         if not issubclass(new_parser, Parser):
             raise TypeError('The new_parser must be Parser!')
+        self._companies[company.code] = company
         self._parsers[company.code] = new_parser
+
+    def __getitem__(self, company_code):
+        return self._companies[company_code], self._parsers[company_code]
+
+    def __iter__(self):
+        """
+        Registered parsers and companies
+
+        :return: The list of company object and parser object
+        :rtype: dict
+        """
+        for k, v in self._parsers.items():
+            yield (self._companies[k], v)
+
+    def __len__(self):
+        return len(self._parsers)
 

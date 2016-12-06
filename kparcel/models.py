@@ -85,7 +85,7 @@ class Parcel(object):
         self.invoice_number = invoice_number
         # The receiver's address
         self.address = address
-        # Note
+        # Note for the parcel
         self.note = note
 
     def __repr__(self):

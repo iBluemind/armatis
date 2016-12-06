@@ -145,11 +145,9 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="kparcel.parser.Parser.fetch">
-<code class="descname">fetch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel/parser.html#Parser.fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.Parser.fetch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Browsing the API request and return the response
-:return: The response of the API request</p>
-</dd></dl>
+<dt id="kparcel.parser.Parser.find">
+<code class="descname">find</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel/parser.html#Parser.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.Parser.find" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="kparcel.parser.Parser.invoice_number">
@@ -223,43 +221,6 @@
 <em class="property">class </em><code class="descclassname">kparcel.parser.</code><code class="descname">ParserManager</code><a class="reference internal" href="_modules/kparcel/parser.html#ParserManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.ParserManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
-<dt id="kparcel.parser.ParserManager.parser">
-<code class="descname">parser</code><span class="sig-paren">(</span><em>company_code</em>, <em>invoice_number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel/parser.html#ParserManager.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.ParserManager.parser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the parser for specific company</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>company_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The company to find the parcel</li>
-<li><strong>invoice_number</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The invoice number to find the parcel</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The parser of the company</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="kparcel.parser.ParserManager.parsers">
-<code class="descname">parsers</code><a class="headerlink" href="#kparcel.parser.ParserManager.parsers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the parsers registered</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Registered parsers</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="kparcel.parser.ParserManager.register_parser">
 <code class="descname">register_parser</code><span class="sig-paren">(</span><em>company</em>, <em>new_parser</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel/parser.html#ParserManager.register_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.ParserManager.register_parser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register the new parser</p>
@@ -272,22 +233,6 @@
 <li><strong>new_parser</strong> (<a class="reference internal" href="#kparcel.parser.Parser" title="kparcel.parser.Parser"><em>Parser</em></a>) &#8211; The new parser</li>
 </ul>
 </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="kparcel.parser.ParserManager.supported_companies">
-<code class="descname">supported_companies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel/parser.html#ParserManager.supported_companies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.ParserManager.supported_companies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Registered parsers and companies</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list of company&#8217;s code and parser object</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -313,6 +258,11 @@
 <dl class="attribute">
 <dt id="kparcel.parser.Source.parcel">
 <code class="descname">parcel</code><a class="headerlink" href="#kparcel.parser.Source.parcel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="kparcel.parser.Source.summary">
+<code class="descname">summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel/parser.html#Source.summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.parser.Source.summary" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -352,6 +302,22 @@ Korean parcel delivery service company for tracking the parcel.</p>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="kparcel.KParcel.last_result">
+<code class="descname">last_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kparcel.html#KParcel.last_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kparcel.KParcel.last_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the most recent tracking result</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The most recent tracking result</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>

@@ -11,6 +11,7 @@ https://github.com/iBluemind/kparcel
 
 from kparcel.models import Company
 from kparcel.parser import ParserManager, Parser
+from kparcel.constants import TRACKING_RESULT_COMPANY
 
 __author__ = 'Han Manjong (han@manjong.org)'
 __version__ = '2.0.0'
@@ -66,7 +67,7 @@ class KParcel(object):
 
         if self.company_code is not None and \
                 self.invoice_number is not None:
-            self._parser = self.parser(self.company_code,
+            self._company, self._parser = self.parser(self.company_code,
                                        self.invoice_number)
 
     def parser(self, company_code, invoice_number):
@@ -77,7 +78,8 @@ class KParcel(object):
         :param int invoice_number: The invoice number to find the parcel
         :return: The parser of the company
         """
-        return self.parser_manager.parser(company_code, invoice_number)
+        company, parser = self.parser_manager[company_code]
+        return company, parser(invoice_number)
 
     def supported_companies(self):
         """
@@ -86,8 +88,7 @@ class KParcel(object):
         :return: The list of company's name and company's parser code
         :rtype: dict
         """
-        companies = self.parser_manager.supported_companies()
-        return list({'name': k, 'code': v} for k, v in companies.items())
+        return list({'name': k.name, 'code': k.code} for k, v in self.parser_manager)
 
     def find(self, company_code=None, invoice_number=None):
         """
@@ -103,10 +104,21 @@ class KParcel(object):
                 raise ValueError('The company_code must be set first.')
             if self.invoice_number is None:
                 raise ValueError('The invoice_number must be set first.')
-            self._parser = self.parser(self.company_code,
+            self._company, self._parser = self.parser(self.company_code,
                                        self.invoice_number)
-        response = self._parser.fetch()
-        parser = self._parser.parser(response)
-        self._parser.parse(parser, response)
+        track_result = self._parser.find()
+        track_result[TRACKING_RESULT_COMPANY] = {
+            'name': self._company.name,
+            'contact': self._company.phone
+        }
+        return track_result
+
+    def last_result(self):
+        """
+        Return the most recent tracking result
+
+        :return: The most recent tracking result
+        :rtype: dict
+        """
         return self._parser.result()
 

@@ -53,7 +53,7 @@
 <span class="kn">from</span> <span class="nn">weakref</span> <span class="k">import</span> <span class="n">WeakValueDictionary</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">from</span> <span class="nn">kparcel.constants</span> <span class="k">import</span> <span class="n">PARSER_REQUEST_HEADER_USER_AGENT</span><span class="p">,</span> \
-    <span class="n">PARSER_RESULT_PARCEL</span><span class="p">,</span> <span class="n">PARSER_RESULT_TRACKS</span>
+    <span class="n">TRACKING_RESULT_PARCEL</span><span class="p">,</span> <span class="n">TRACKING_RESULT_TRACKS</span>
 <span class="kn">from</span> <span class="nn">kparcel.models</span> <span class="k">import</span> <span class="n">Parcel</span><span class="p">,</span> <span class="n">Company</span><span class="p">,</span> <span class="n">Tracker</span>
 
 
@@ -67,16 +67,22 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parcel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parcel</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parcel</span>
 
     <span class="nd">@parcel</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">parcel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parcel</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parcel</span><span class="p">,</span> <span class="n">Parcel</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The parcel must be Parcel!&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__parcel</span> <span class="o">=</span> <span class="n">parcel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parcel</span> <span class="o">=</span> <span class="n">parcel</span>
 
 <div class="viewcode-block" id="Source.add_track"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Source.add_track">[docs]</a>    <span class="k">def</span> <span class="nf">add_track</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_track</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tracker</span><span class="o">.</span><span class="n">add_track</span><span class="p">(</span><span class="n">new_track</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tracker</span><span class="o">.</span><span class="n">add_track</span><span class="p">(</span><span class="n">new_track</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Source.summary"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Source.summary">[docs]</a>    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">TRACKING_RESULT_PARCEL</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">parcel</span><span class="p">,</span>
+            <span class="n">TRACKING_RESULT_TRACKS</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span>
+        <span class="p">}</span></div></div>
 
 
 <div class="viewcode-block" id="ParserRequest"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.ParserRequest">[docs]</a><span class="k">class</span> <span class="nc">ParserRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -85,7 +91,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
         <span class="c1"># The body content for HTTP request</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">body</span>
-        <span class="c1"># The header content for HTTP request</span>
+        <span class="c1"># The header for HTTP request</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span>
         <span class="c1"># Add an user agent of Internet Explorer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PARSER_REQUEST_HEADER_USER_AGENT</span></div>
@@ -95,15 +101,15 @@
 <div class="viewcode-block" id="Parser"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Parser">[docs]</a><span class="k">class</span> <span class="nc">Parser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invoice_number</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__invoice_number</span> <span class="o">=</span> <span class="n">invoice_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_invoice_number</span> <span class="o">=</span> <span class="n">invoice_number</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">invoice_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__invoice_number</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_invoice_number</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parser_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parser_request</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parser_request</span>
 
     <span class="nd">@parser_request</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">parser_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser_request</span><span class="p">):</span>
@@ -114,7 +120,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parser_request</span><span class="p">,</span> <span class="n">ParserRequest</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The parser_request must be ParserRequest!&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__parser_request</span> <span class="o">=</span> <span class="n">parser_request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parser_request</span> <span class="o">=</span> <span class="n">parser_request</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parcel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -135,14 +141,14 @@
         <span class="n">pr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser_request</span>
         <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">pr</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">pr</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">pr</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Parser.fetch"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Parser.fetch">[docs]</a>    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Browsing the API request and return the response</span>
 <span class="sd">        :return: The response of the API request</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">()</span>
         <span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">))</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
+            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="nd">@abstractmethod</span>
 <div class="viewcode-block" id="Parser.parse"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Parser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
@@ -152,7 +158,7 @@
 <span class="sd">        :param parser: The module for parsing the response</span>
 <span class="sd">        :param str response: The response of the API request</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">(</span><span class="s1">&#39;Please implement parse()!&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">(</span><span class="s2">&quot;Please implement the method &#39;parse&#39;!&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Parser.parser"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Parser.parser">[docs]</a>    <span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -162,7 +168,6 @@
 <span class="sd">        :return: The module for parsing the response</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="Parser.add_track"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Parser.add_track">[docs]</a>    <span class="k">def</span> <span class="nf">add_track</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_track</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -179,54 +184,19 @@
 <span class="sd">        :return: The found parcel and tracking informations</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="n">PARSER_RESULT_PARCEL</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">parcel</span><span class="p">,</span>
-            <span class="n">PARSER_RESULT_TRACKS</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">tracks</span>
-        <span class="p">}</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Parser.find"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.Parser.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch</span><span class="p">()</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">()</span></div></div>
 
 
 <div class="viewcode-block" id="ParserManager"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.ParserManager">[docs]</a><span class="k">class</span> <span class="nc">ParserManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_companies</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span> <span class="o">=</span> <span class="n">WeakValueDictionary</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company_code</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">company_code</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">parser</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">parser</span>
-
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parsers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the parsers registered</span>
-
-<span class="sd">        :return: Registered parsers</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-
-<div class="viewcode-block" id="ParserManager.parser"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.ParserManager.parser">[docs]</a>    <span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company_code</span><span class="p">,</span> <span class="n">invoice_number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the parser for specific company</span>
-
-<span class="sd">        :param str company_code: The company to find the parcel</span>
-<span class="sd">        :param int invoice_number: The invoice number to find the parcel</span>
-<span class="sd">        :return: The parser of the company</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">company_code</span><span class="p">](</span><span class="n">invoice_number</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="ParserManager.supported_companies"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.ParserManager.supported_companies">[docs]</a>    <span class="k">def</span> <span class="nf">supported_companies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Registered parsers and companies</span>
-
-<span class="sd">        :return: The list of company&#39;s code and parser object</span>
-<span class="sd">        :rtype: dict</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="ParserManager.register_parser"><a class="viewcode-back" href="../../kparcel.html#kparcel.parser.ParserManager.register_parser">[docs]</a>    <span class="k">def</span> <span class="nf">register_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">new_parser</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -239,7 +209,24 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The company must be Company!&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">new_parser</span><span class="p">,</span> <span class="n">Parser</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The new_parser must be Parser!&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">company</span><span class="o">.</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_parser</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_companies</span><span class="p">[</span><span class="n">company</span><span class="o">.</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="n">company</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">company</span><span class="o">.</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_parser</span></div>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company_code</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_companies</span><span class="p">[</span><span class="n">company_code</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">company_code</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registered parsers and companies</span>
+
+<span class="sd">        :return: The list of company object and parser object</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_companies</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">)</span></div>
 
 </pre></div>
 
