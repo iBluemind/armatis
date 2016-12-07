@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 
-import urllib.request
+from time import sleep
 import six
 from abc import abstractmethod, ABCMeta
-from contextlib import closing
 from weakref import WeakValueDictionary
 from bs4 import BeautifulSoup
+import requests
+from requests import Request
 from armatis.constants import PARSER_REQUEST_HEADER_USER_AGENT, \
-    TRACKING_RESULT_PARCEL, TRACKING_RESULT_TRACKS
+    TRACKING_RESULT_PARCEL, TRACKING_RESULT_TRACKS, PARSER_REQUEST_MULTIPLE_DELAY
 from armatis.models import Parcel, Company, Tracker
 
 
@@ -41,41 +42,56 @@ class Source(object):
 
 
 class ParserRequest(object):
-    def __init__(self, url=None, body=None, header={}):
+    def __init__(self, url=None, method=None, body=None, header=None):
         # API endpoint
         self.url = url
+        # HTTP request method
+        self.method = method if method is not None else 'GET'
         # The body content for HTTP request
         self.body = body
         # The header for HTTP request
+        if header is None:
+            header = {}
         self.header = header
         # Add an user agent of Internet Explorer
         self.header['User-Agent'] = PARSER_REQUEST_HEADER_USER_AGENT
+
+
+class RequestManager(object):
+    """
+    Provide the additional HTTP request information for browsing the API
+
+    """
+    def __init__(self):
+        self.requests = []
+        self._current = 0
+
+    def add_request(self, new_request):
+        if not isinstance(new_request, ParserRequest):
+            raise TypeError('The new_request must be ParserRequest!')
+        self.requests.append(new_request)
+
+    def _make_request(self, request):
+        return Request(request.method, request.url, data=request.body, headers=request.header)
+
+    def __iter__(self):
+        for request in self.requests:
+            yield self._make_request(request)
+
+    def __len__(self):
+        return len(self.requests)
 
 
 @six.add_metaclass(ABCMeta)
 class Parser(object):
     def __init__(self, invoice_number):
         self.source = Source()
+        self.request_manager = RequestManager()
         self._invoice_number = invoice_number
 
     @property
     def invoice_number(self):
         return self._invoice_number
-
-    @property
-    def parser_request(self):
-        return self._parser_request
-
-    @parser_request.setter
-    def parser_request(self, parser_request):
-        """
-        Provide the additional HTTP request information for browsing the API
-
-        :param ParserRequest parser_request: The HTTP request information
-        """
-        if not isinstance(parser_request, ParserRequest):
-            raise TypeError('The parser_request must be ParserRequest!')
-        self._parser_request = parser_request
 
     @property
     def parcel(self):
@@ -92,18 +108,22 @@ class Parser(object):
             raise TypeError('The parcel must be Parcel!')
         self.source.parcel = parcel
 
-    def _make_request(self):
-        pr = self.parser_request
-        return urllib.request.Request(pr.url, pr.body, pr.header)
+    def add_request(self, new_request):
+        return self.request_manager.add_request(new_request)
 
     def _fetch(self):
         """
         Browsing the API request and return the response
         :return: The response of the API request
         """
-        request = self._make_request()
-        with closing(urllib.request.urlopen(request)) as response:
-            return response.read()
+        with requests.Session() as session:
+            for index, request in enumerate(self.request_manager):
+                if index != 0:
+                    sleep(PARSER_REQUEST_MULTIPLE_DELAY)
+                prepared = session.prepare_request(request)
+                response = session.send(prepared)
+                if index == (len(self.request_manager) - 1):
+                    return response.text
 
     @abstractmethod
     def parse(self, parser, response):

@@ -2,7 +2,6 @@
 
 
 import re
-from bs4 import BeautifulSoup
 from armatis.models import Parcel, Track
 from armatis.parser import Parser, ParserRequest
 
@@ -10,10 +9,9 @@ from armatis.parser import Parser, ParserRequest
 class LogenParser(Parser):
     def __init__(self, invoice_number):
         super(LogenParser, self).__init__(invoice_number)
-        parser_request = ParserRequest()
-        parser_request.url = 'http://www.ilogen.com/homeshopping/stracker_trace_xml.asp?' \
-                             'invoice=%s' % self.invoice_number
-        self.parser_request = parser_request
+        parser_request = ParserRequest(url='http://www.ilogen.com/homeshopping/stracker_trace_xml.asp?' \
+                             'invoice=%s' % self.invoice_number)
+        self.add_request(parser_request)
 
     def parse(self, parser, response):
         tracking_info = parser.find('tracking_info')

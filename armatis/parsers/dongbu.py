@@ -8,10 +8,9 @@ from armatis.parser import Parser, ParserRequest
 class DongbuParser(Parser):
     def __init__(self, invoice_number):
         super(DongbuParser, self).__init__(invoice_number)
-        parser_request = ParserRequest()
-        parser_request.url = 'http://www.dongbups.com/newHtml/delivery/' \
-                             'dvsearch_View.jsp?item_no=%s' % self.invoice_number
-        self.parser_request = parser_request
+        parser_request = ParserRequest(url='http://www.dongbups.com/newHtml/delivery/' \
+                             'dvsearch_View.jsp?item_no=%s' % self.invoice_number)
+        self.add_request(parser_request)
 
     def parse(self, parser, response):
         tables = parser.find_all('table', {'class': 'dv_list'})

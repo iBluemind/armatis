@@ -8,10 +8,9 @@ from armatis.parser import Parser, ParserRequest
 class KGYellowCapParser(Parser):
     def __init__(self, invoice_number):
         super(KGYellowCapParser, self).__init__(invoice_number)
-        parser_request = ParserRequest()
-        parser_request.url = 'https://www.kgyellowcap.co.kr/delivery/waybill.html?mode=bill'
-        parser_request.body = 'delivery=%s' % self.invoice_number
-        self.parser_request = parser_request
+        parser_request = ParserRequest(url='https://www.kgyellowcap.co.kr/delivery/waybill.html?mode=bill',
+                                       body='delivery=%s' % self.invoice_number)
+        self.add_request(parser_request)
 
     def parse(self, parser, response):
         basic_table = parser.find('table', {'class': 'view'})

@@ -8,9 +8,8 @@ from armatis.parser import Parser, ParserRequest
 class KGBParser(Parser):
     def __init__(self, invoice_number):
         super(KGBParser, self).__init__(invoice_number)
-        parser_request = ParserRequest()
-        parser_request.url = 'http://www.kgbls.co.kr/auction/?number=%s' % self.invoice_number
-        self.parser_request = parser_request
+        parser_request = ParserRequest(url='http://www.kgbls.co.kr/auction/?number=%s' % self.invoice_number)
+        self.add_request(parser_request)
 
     def parse(self, parser, response):
         basic_table = parser.find('table', {'class': 'view'})

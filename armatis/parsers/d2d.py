@@ -8,11 +8,10 @@ from armatis.parser import Parser, ParserRequest
 class DoorToDoorParser(Parser):
     def __init__(self, invoice_number):
         super(DoorToDoorParser, self).__init__(invoice_number)
-        parser_request = ParserRequest()
-        parser_request.url = 'http://www.doortodoor.co.kr/tracking/jsp/cmn/Tracking_new.jsp?' \
+        parser_request = ParserRequest(url='http://www.doortodoor.co.kr/tracking/jsp/cmn/Tracking_new.jsp?' \
                              'QueryType=3&pOrderNo=&pTelNo=&pFromDate=&pToDate=&pCustId=&' \
-                             'pageno=1&rcv_cnt=10&pTdNo=%s' % self.invoice_number
-        self.parser_request = parser_request
+                             'pageno=1&rcv_cnt=10&pTdNo=%s' % self.invoice_number)
+        self.add_request(parser_request)
 
     def parse(self, parser, response):
         tables = parser.find_all('tbody')

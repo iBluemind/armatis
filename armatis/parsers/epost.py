@@ -9,11 +9,10 @@ class EPostParser(Parser):
     def __init__(self, invoice_number, auth_key):
         super(EPostParser, self).__init__(invoice_number)
         self.auth_key = auth_key
-        parser_request = ParserRequest()
-        parser_request.url = 'http://openapi.epost.go.kr/trace/retrieveLongitudinalService/' \
+        parser_request = ParserRequest(url='http://openapi.epost.go.kr/trace/retrieveLongitudinalService/' \
                              'retrieveLongitudinalService/getLongitudinalDomesticList?' \
-                             'ServiceKey=%s&rgist=%s' % (auth_key, self.invoice_number)
-        self.parser_request = parser_request
+                             'ServiceKey=%s&rgist=%s' % (auth_key, self.invoice_number))
+        self.add_request(parser_request)
 
     def parse(self, parser, response):
         if self.auth_key is None:

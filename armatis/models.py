@@ -70,8 +70,7 @@ class Tracker(object):
         raise LookupError("Can't find the track by status %s" % status)
 
     def __iter__(self):
-        for track in self._tracks:
-            yield track
+        return iter(self._tracks)
 
 
 class Parcel(object):
