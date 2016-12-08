@@ -1,0 +1,343 @@
+
+
+
+
+
+
+
+
+
+
+
+ <!-- GTX -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>KGLogis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="Author" content=""/>
+<meta name="Keywords" content=""/>
+<meta name="Description" content=""/>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="/css/front/base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/css/front/common.css"  media="screen">
+<link rel="stylesheet" type="text/css" href="/css/front/content.css"  media="screen">
+<script type="text/javascript" src="/js/front/jquery.js"></script>
+<script type="text/javascript" src="/js/front/jquery.easing.1.3.js"></script>
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/js/front/common.js"></script>
+<script type="text/javascript">
+
+function goSubmit() {
+		
+	
+}
+
+</script>
+</head>
+<body>
+<ul id="skipnavi">	
+	<li><a href="#contents">본문 바로가기</a></li>
+	<li><a href="#footer">하단 바로가기</a></li>
+</ul>
+
+<!-- header -->
+<header id="header">
+	<!-- header_wrap -->
+	<section class="header_wrap">
+		<h1>
+			<a href="/" title="기다림이 즐겁다,KG Logis">
+				<span><img src="/images/front/common/logo_info.gif" alt="기다림이 즐겁다"/></span>
+				<span><img src="/images/front/common/logo.gif" alt="KG Logis Logo"/></span>
+			</a>
+		</h1>
+		<nav class="gnb">
+			<ul>
+				<li><a href="/receipt" title="택배예약">택배예약</a></li>
+				<li><a href="/delivery" class="actived" title="배송조회">배송조회</a></li>
+				<li><a href="/service" title="서비스안내">서비스안내</a></li>
+				<li><a href="/customer" title="고객센터">고객센터</a></li>
+				<li><a href="/intro" title="회사소개">회사소개</a></li>
+			</ul>
+		</nav>
+
+		<ul class="global_menu">
+		
+			<li><a href="/member/login.html" title="LOGIN">LOGIN</a></li>
+			<li><a href="/member/join.html" title="JOIN">JOIN</a></li>
+		
+		</ul>
+	</section>
+	<!-- //header_wrap -->
+</header>
+<!-- //header -->
+
+
+<!-- container -->
+<section id="container" class="inquiry">
+	<!-- sub_title -->
+	<h1 class="sub_title">
+		<img src="/images/front/content/inquiry_title.png" alt="배송조회 KG Logis를 찾아주셔서 감사합니다. "/>
+		<span class="icon_title box"></span>
+	</h1>
+	<!-- //sub_title -->
+	<!-- contents -->
+	<section id="contents">
+		<!-- sub_tab -->		
+		<div class="sub_tab">
+			<ul>
+				<li><a href="./waybill.jsp" title="운송장번호로 조회">운송장번호로 조회</a></li>
+				<li><a href="./telnum.jsp" title="전화번호로 조회">전화번호로 조회</a></li>
+				<li><a href="./ordernum.jsp" title="주문번호로 조회 ">주문번호로 조회 </a></li>
+			</ul>        
+		</div>
+		<!-- //sub_tab -->
+
+		
+		
+		<h2 class="content_title">배송조회결과</h2>
+		<p class="content_info">고객님의 소중한 상품의 전달상황을 배송조회 결과를 통해 확인하실 수 있습니다.</p>
+			
+		<article class="input_group">
+			<table class="i_table_01">
+				<caption>배송조회결과 정보표</caption>
+				<colgroup>
+					<col style="width:180px">
+					<col style="width:270px">
+					<col style="width:180px">
+					<col style="width:270px">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th scope="row">운송장번호</th>
+						<td>1234-5678-9123</td>
+						<th scope="row">송화주</th>
+						<td>한만종 님</td>
+					</tr>
+					<tr>
+						<th scope="row">상품명</th>
+						<td>일반테스트상품</td>
+						<th scope="row">수화주</th>						
+						<td>한*종 님</td>
+					</tr>
+					<tr>
+						<th scope="row">수량</th>
+						<td colspan="3">1</td>						
+					</tr>
+					<tr>
+						<th scope="row">수화주 주소</th>
+						<td colspan="3">서울 동작구  사당4동</td>						
+					</tr>
+				</tbody>
+			</table>		
+		</article>
+		<!--
+		//	li 태그에 actived 클래스 추가시 활성화
+		-->
+
+		<ol class="result_step">
+			<li class="step01 ">
+				<div class="step_wrap">
+				<dl>
+					<dt>STEP 01</dt>
+					<dd>상품인수</dd>
+				</dl>
+				</div>
+			</li>			
+			<li class="step02 ">
+				<div class="step_wrap">
+				<dl>
+					<dt>STEP 02</dt>
+					<dd>상품이동중</dd>
+				</dl>
+				</div>
+			</li>			
+			<li class="step03 ">
+				<div class="step_wrap">
+				<dl>
+					<dt>STEP 03</dt>
+					<dd>배달지도착</dd>
+				</dl>
+				</div>
+			</li>			
+			<li class="step04 ">
+				<div class="step_wrap">
+				<dl>
+					<dt>STEP 04</dt>
+					<dd>배달출발</dd>
+				</dl>
+				</div>
+			</li>			
+			<li class="step05 actived">
+				<div class="step_wrap">
+				<dl>
+					<dt>STEP 05</dt>
+					<dd>배달완료</dd>
+				</dl>
+				</div>
+			</li>		
+		</ol>
+
+		<article class="inquiry_result">
+			<table class="c_table_01">
+				<caption>배송조회결과 상태 표</caption>
+				<colgroup>
+					<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:50%">
+					<col style="width:20%">
+					<col style="width:10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">날짜</th>
+						<th scope="col">시간</th>
+						<th scope="col">상태</th>
+						<th scope="col">배송처</th>
+						<th scope="col">연락처</th>
+					</tr>
+				</thead>
+				<tbody>
+		
+					<tr>
+						<td><span>2016.10.17</span></td>
+						<td><span>17:11</span></td>
+						<td><span>상품을 발송하기 위한 운송장을 발행하였습니다.</span></td>
+						<td><span>일산동구</span></td>
+						<td><span>031-903-7082</span></td>
+					</tr>
+		
+					<tr>
+						<td><span>2016.10.17</span></td>
+						<td><span>21:41</span></td>
+						<td><span>배달지역으로 상품이 이동중입니다.</span></td>
+						<td><span>일산집하센터</span></td>
+						<td><span>1588-0123</span></td>
+					</tr>
+		
+					<tr>
+						<td><span>2016.10.18</span></td>
+						<td><span>03:08</span></td>
+						<td><span>배달지역으로 상품이 이동중입니다.</span></td>
+						<td><span>이천터미널</span></td>
+						<td><span>05053500106</span></td>
+					</tr>
+		
+					<tr>
+						<td><span>2016.10.18</span></td>
+						<td><span>11:19</span></td>
+						<td><span>배달지에 고객님의 상품이 도착하였습니다.</span></td>
+						<td><span>동작</span></td>
+						<td><span>02-502-9129</span></td>
+					</tr>
+		
+					<tr>
+						<td><span>2016.10.18</span></td>
+						<td><span>11:29</span></td>
+						<td><span>고객님의 상품을 배달할 예정입니다.</span></td>
+						<td><span>동작</span></td>
+						<td><span>010-1234-5678</span></td>
+					</tr>
+		
+					<tr>
+						<td><span>2016.10.18</span></td>
+						<td><span>18:24</span></td>
+						<td><span>고객님의 상품이 배달완료 되었습니다.</span></td>
+						<td><span>동작</span></td>
+						<td><span>010-1234-5678</span></td>
+					</tr>
+		
+		
+		
+		
+      		<tr>
+		        <td colspan="5">
+          			<script src="http://www.logii.com/interface/delvprom/delv_link.asp?comp_code=dongex&inv_no=123456789123"></script>
+		        </td>
+		      </tr>
+		
+		
+				<!-- 
+					<tr>
+						<td>2015.05.18</td>
+						<td><em class="c_orange">접수중</em></td>
+						<td>KG로지스</td>
+						<td>010.0000.0000</td>
+					</tr>
+					<tr>
+						<td colspan="4">조회된 데이터가 없습니다.<br>운송장이 등록되지 않았거나 업체에서 상품을 준비중이니 업체에 문의하여 주십시오.</td>
+					</tr>
+				 -->				 
+				</tbody>
+			</table>
+		</article>
+		
+	</section>
+	<!-- //contents -->
+</section>
+<!-- //container -->
+
+<!-- footer -->
+<footer id="footer">
+	<!-- footer_wrap -->
+	<section class="footer_wrap">
+		<h1><img src="/images/front/common/footer_logo.gif" alt="KG Logis Logo"/></h1>
+		<!-- f_data -->
+		<div class="f_data">
+			<ul>
+				<li><a href="/common/stipulation.html" title="회원이용약관">회원이용약관</a></li>
+				<li><a href="/common/private.html" title="개인정보취급방침">개인정보취급방침</a></li>
+				<li><a href="/common/stipulation_delivery.html" title="택배이용약관">택배이용약관</a></li>
+				<li><a href="/common/email.html" title="이메일주소 무단수집거부">이메일주소 무단수집거부</a></li>
+				<li><a href="/common/sitemap.html" title="사이트맵">사이트맵</a></li>
+				<li>
+					<p class="family_select">
+						<select title="KG 가족사이트 이동 선택" id="f_select">
+							<option value="">KG 가족사</option>
+							<option value="http://kgfamily.co.kr" title="KG 그룹">KG 그룹</option>
+							<option value="http://www.kgchem.co.kr" title="KG 케미칼">KG 케미칼</option>
+							<option value="http://www.inicis.com" title="KG 이니시스">KG 이니시스</option>
+							<option value="http://www.mobilians.co.kr" title="KG 모빌리언스">KG 모빌리언스</option>
+							<option value="http://www.kgets.co.kr" title="KG ETS">KG ETS</option>
+							<option value="http://www.zeroin.co.kr" title="KG 제로인">KG 제로인</option>
+							<option value="http://www.passone.net" title="KG 패스원">KG 패스원</option>
+							<option value="http://www.kgitbank.co.kr" title="KG 아이티뱅크">KG 아이티뱅크</option>
+							<option value="http://www.sunningpoint.com" title="KG 써닝라이프">KG 써닝라이프</option>
+							<option value="http://www.sunningleader.co.kr" title="KG 써닝라이프(리더십센터)">KG 써닝라이프(리더십센터)</option>
+							<option value="http://www.edaily.co.kr" title="이데일리">이데일리</option>
+							<option value="http://tv.edaily.co.kr" title="이데일리TV">이데일리TV</option>
+						</select>				
+					</p>
+				</li>
+			</ul>
+			<address>주) KG로지스 사업자등록번호 : 120-87-76237  대표 : 곽정현<br>463-400 경기도 성남시 분당구 대왕판교로 660 유스페이스1 A동 6층</address>
+			<p class="copy">Copyright 2015 KG Logis. All right reserved.</p>
+		</div>
+		<!-- //f_data -->
+
+		<!-- footer_cs -->
+		<div class="footer_cs">
+			<p class="f_cs_title"><img src="/images/front/common/footer_cs_title.gif" alt="택배예약은 전국 어디서나 KG로지스"/></p>
+			<p class="f_cs_num">1588-0123</p>
+			<p style="margin-bottom: 5px;"><b>(YES24/iSTYLE24 전용:1670-8244)</b></p>
+			<p class="f_cs_time"><img src="/images/front/common/footer_cs_time.gif" alt="평일  am 09 : 00 ~ pm 06 : 00,토요일  am 09 : 00 ~ pm 06 : 00"/></p>
+		</div>
+		<!-- //footer_cs -->
+	</section>
+	<!-- //footer_wrap -->
+</footer>
+<!-- //footer -->
+
+</body>
+</html>
+
+
+
+
