@@ -31,9 +31,6 @@ class Armatis(object):
                                                 DoorToDoorParser)
             self.parser_manager.register_parser(Company('CVSNet편의점택배', 'cvs', 10, '1577-1287'),
                                                 CVSNetParser)
-            from armatis.parsers.dongbu import DongbuParser
-            self.parser_manager.register_parser(Company('동부택배', 'dongbu', 12, '1588-8848'),
-                                                DongbuParser)
             from armatis.parsers.ems import EMSParser
             self.parser_manager.register_parser(Company('EMS', 'ems', 13, '1588-1300'),
                                                 EMSParser)
@@ -57,9 +54,9 @@ class Armatis(object):
                                                 LogenParser)
             self.parser_manager.register_parser(Company('GTX로지스', 'gtx', 12, '1588-1756'),
                                                 GTXParser)
-            from armatis.parsers.yellowcap import KGYellowCapParser
-            self.parser_manager.register_parser(Company('KG옐로우캡', 'kgyellow', 11, '1588-0123'),
-                                                KGYellowCapParser)
+            from armatis.parsers.kg_logis import KGLogisParser
+            self.parser_manager.register_parser(Company('KG로지스', 'kglogis', 12, '1588-0123'),
+                                                KGLogisParser)
 
         # Register the bundle parsers
         register_parsers()
