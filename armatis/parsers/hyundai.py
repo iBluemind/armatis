@@ -8,18 +8,20 @@ from armatis.parser import Parser, ParserRequest
 class HyundaiParser(Parser):
     def __init__(self, invoice_number):
         super(HyundaiParser, self).__init__(invoice_number)
-        self.add_request(ParserRequest(
-            url='https://www.hlc.co.kr/home/personal/inquiry/track',
-            method='POST',
-            body=bytes('InvNo=%s&action=processInvoiceSubmit' % self.invoice_number, 'utf-8'),
-            header={'Content-Type': 'application/x-www-form-urlencoded'}
-        ))
-        self.add_request(ParserRequest(
-            url='https://www.hlc.co.kr/home/personal/inquiry/track',
-            method='POST',
-            body=bytes('action=processInvoiceLinkSubmit', 'utf-8'),
-            header={'Content-Type': 'application/x-www-form-urlencoded'}
-        ))
+        self.requests = [
+            {
+                'url': 'https://www.hlc.co.kr/home/personal/inquiry/track',
+                'method': 'POST',
+                'body': bytes('InvNo=%s&action=processInvoiceSubmit' % self.invoice_number, 'utf-8'),
+                'header': {'Content-Type': 'application/x-www-form-urlencoded'}
+            },
+            {
+                'url': 'https://www.hlc.co.kr/home/personal/inquiry/track',
+                'method': 'POST',
+                'body': bytes('action=processInvoiceLinkSubmit', 'utf-8'),
+                'header': {'Content-Type': 'application/x-www-form-urlencoded'}
+            }
+        ]
 
     def parse(self, parser, response):
         tr = parser.find('tr', {'class': 'bot'})

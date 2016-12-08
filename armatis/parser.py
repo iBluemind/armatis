@@ -13,6 +13,16 @@ from armatis.constants import PARSER_REQUEST_HEADER_USER_AGENT, \
 from armatis.models import Parcel, Company, Tracker
 
 
+def dict2parser_request(pr_dict):
+    pr = ParserRequest(
+        url=pr_dict.get('url'),
+        method=pr_dict.get('method'),
+        body=pr_dict.get('body'),
+        header=pr_dict.get('header')
+    )
+    return pr
+
+
 class Source(object):
     def __init__(self):
         self.tracker = Tracker()
@@ -44,6 +54,8 @@ class Source(object):
 class ParserRequest(object):
     def __init__(self, url=None, method=None, body=None, header=None):
         # API endpoint
+        if url is None:
+            raise ValueError('The URL must be set!')
         self.url = url
         # HTTP request method
         self.method = method if method is not None else 'GET'
@@ -107,6 +119,20 @@ class Parser(object):
         if not isinstance(parcel, Parcel):
             raise TypeError('The parcel must be Parcel!')
         self.source.parcel = parcel
+
+    @property
+    def requests(self):
+        return self.request_manager
+
+    @requests.setter
+    def requests(self, requests):
+        for request in requests:
+            if isinstance(request, ParserRequest):
+                self.request_manager.add_request(request)
+            elif isinstance(request, dict):
+                self.request_manager.add_request(dict2parser_request(request))
+            else:
+                raise TypeError('The member of requests must be dict or ParserRequest!')
 
     def add_request(self, new_request):
         return self.request_manager.add_request(new_request)
