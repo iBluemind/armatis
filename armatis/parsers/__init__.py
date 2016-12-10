@@ -1,6 +1,5 @@
 __all__ = [
     'd2d',
-    'dongbu',
     'ems',
     'epost',
     'hanjin',
@@ -8,5 +7,5 @@ __all__ = [
     'hyundai',
     'kgb',
     'logen',
-    'yellowcap'
+    'kg_logis'
 ]

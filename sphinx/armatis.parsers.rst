@@ -12,14 +12,6 @@ armatis.parsers.d2d module
     :undoc-members:
     :show-inheritance:
 
-armatis.parsers.dongbu module
------------------------------
-
-.. automodule:: armatis.parsers.dongbu
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 armatis.parsers.ems module
 --------------------------
 
@@ -60,6 +52,14 @@ armatis.parsers.hyundai module
     :undoc-members:
     :show-inheritance:
 
+armatis.parsers.kg_logis module
+-------------------------------
+
+.. automodule:: armatis.parsers.kg_logis
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 armatis.parsers.kgb module
 --------------------------
 
@@ -72,14 +72,6 @@ armatis.parsers.logen module
 ----------------------------
 
 .. automodule:: armatis.parsers.logen
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-armatis.parsers.yellowcap module
---------------------------------
-
-.. automodule:: armatis.parsers.yellowcap
     :members:
     :undoc-members:
     :show-inheritance:
