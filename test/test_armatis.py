@@ -113,4 +113,3 @@ class ArmatisTest(unittest.TestCase):
         self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, '배송완료')
         self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, '평택')
         self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].phone1, '010-1234-5678')
-
