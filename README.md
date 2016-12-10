@@ -1,6 +1,6 @@
 # Armatis
 
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![PyPI version](https://badge.fury.io/py/armatis.svg)](https://badge.fury.io/py/armatis)
 [![Build Status](https://travis-ci.com/iBluemind/armatis.svg?token=kCLzatyPXGgAKL1Y4CvM&branch=master)](https://travis-ci.com/iBluemind/armatis)
 

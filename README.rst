@@ -1,8 +1,8 @@
 Armatis
 =======
 
-.. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
-   :target: https://opensource.org/licenses/BSD-3-Clause
+.. image:: https://img.shields.io/badge/License-BSD%202--Clause-blue.svg
+   :target: https://opensource.org/licenses/BSD-2-Clause
 .. image:: https://badge.fury.io/py/armatis.svg
    :target: https://badge.fury.io/py/armatis
 .. image:: https://travis-ci.com/iBluemind/armatis.svg?token=kCLzatyPXGgAKL1Y4CvM&branch=master
@@ -132,15 +132,15 @@ The following delivery companies are supported currently.
 +--------------------+------------------------+----------------+
 | Company            | Test existed           | Last Updated   |
 +====================+========================+================+
-| CJ대한통운         | :white\_check\_mark:   | 2016-12-10     |
+| CJ대한통운         |            o           | 2016-12-10     |
 +--------------------+------------------------+----------------+
-| 로젠택배           | :white\_check\_mark:   | 2016-12-10     |
+| 로젠택배           |            o           | 2016-12-10     |
 +--------------------+------------------------+----------------+
-| 현대택배           | :white\_check\_mark:   | 2016-12-10     |
+| 현대택배           |            o           | 2016-12-10     |
 +--------------------+------------------------+----------------+
-| 한진택배           | :white\_check\_mark:   | 2016-12-10     |
+| 한진택배           |            o           | 2016-12-10     |
 +--------------------+------------------------+----------------+
-| KG로지스           | :white\_check\_mark:   | 2016-12-10     |
+| KG로지스           |            o           | 2016-12-10     |
 +--------------------+------------------------+----------------+
 | CVSNet편의점택배   |                        | 2014-10-19     |
 +--------------------+------------------------+----------------+

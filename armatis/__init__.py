@@ -14,7 +14,7 @@ from armatis.parser import ParserManager, Parser
 from armatis.constants import TRACKING_RESULT_COMPANY
 
 __author__ = 'Han Manjong (han@manjong.org)'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 __copyright__ = 'Copyright (c) 2016 Han Manjong'
 __license__ = 'BSD'
 
