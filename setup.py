@@ -1,3 +1,4 @@
+from armatis import __version__ as armatis_current_version
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
@@ -16,7 +17,7 @@ def armatis_test_suite():
 
 setup(
     name='armatis',
-    version='1.0.0',
+    version=armatis_current_version,
     description='Armatis parses the website or web API response of Korean parcel'
                 ' delivery service company for tracking the parcel.',
     long_description=long_description,
@@ -32,7 +33,9 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5'
     ],
     keywords='parcel delivery korea',
     packages=find_packages(exclude=['sphinx', 'docs', 'test']),
