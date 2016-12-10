@@ -12,7 +12,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 def armatis_test_suite():
     test_loader = unittest.TestLoader()
-    test_suite = test_loader.discover('test', pattern='test_*.py')
+    test_suite = test_loader.discover('tests', pattern='test_*.py')
     return test_suite
 
 setup(
@@ -38,7 +38,7 @@ setup(
         'Programming Language :: Python :: 3.5'
     ],
     keywords='parcel delivery korea',
-    packages=find_packages(exclude=['sphinx', 'docs', 'test']),
+    packages=find_packages(exclude=['sphinx', 'docs', 'tests']),
     install_requires=[
         'requests',
         'beautifulsoup4',
