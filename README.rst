@@ -7,6 +7,8 @@ Armatis
    :target: https://badge.fury.io/py/armatis
 .. image:: https://travis-ci.com/iBluemind/armatis.svg?token=kCLzatyPXGgAKL1Y4CvM&branch=master
    :target: https://travis-ci.com/iBluemind/armatis
+.. image:: https://readthedocs.org/projects/armatis/badge/
+   :target: http://armatis.readthedocs.io/en/latest/
 
 Armatis parses the website or web API response of Korean
 parcel delivery service company for tracking the parcel.
@@ -213,7 +215,7 @@ Documentation
 -------------
 
 Completed documentation for Armatis is available on
-`here <https://ibluemind.github.io/armatis>`__.
+`ReadtheDocs <http://armatis.readthedocs.io/en/latest/>`__.
 
 Contributing
 ------------

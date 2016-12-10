@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![PyPI version](https://badge.fury.io/py/armatis.svg)](https://badge.fury.io/py/armatis)
 [![Build Status](https://travis-ci.com/iBluemind/armatis.svg?token=kCLzatyPXGgAKL1Y4CvM&branch=master)](https://travis-ci.com/iBluemind/armatis)
+[![Read the Docs](https://readthedocs.org/projects/armatis/badge/)](http://armatis.readthedocs.io/en/latest/)
 
 :package: Armatis parses the website or web API response of Korean parcel delivery service company for tracking the parcel.
 
@@ -193,7 +194,7 @@ tracker.parser_manager.register_parser(the_new_company, NewCompanyParser)
 
 ## Documentation
 
-Completed documentation for Armatis is available on [here](https://ibluemind.github.io/armatis).
+Completed documentation for Armatis is available on [ReadtheDocs](http://armatis.readthedocs.io/en/latest/).
 
 
 ## Contributing
