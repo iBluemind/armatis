@@ -233,7 +233,7 @@ You can also use list and dictionary!
          'header': {'Content-Type': 'application/x-www-form-urlencoded'}
       },
       {
-         'url': http://thecompany.co.kr/track/result
+         'url': 'http://thecompany.co.kr/track/result'
       }
    ]
 
