@@ -21,6 +21,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), "_themes"))
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -134,7 +138,7 @@ html_theme = 'flask_small'
 html_theme_options = dict(github_fork='ibluemind/armatis', index_logo=False)
 
 # Add any paths that contain custom themes here, relative to this directory.
-# html_theme_path = []
+html_theme_path = ['_themes']
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
