@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import re
 from armatis.models import Parcel, Track
 from armatis.parser import Parser, ParserRequest
@@ -10,7 +9,7 @@ class LogenParser(Parser):
     def __init__(self, invoice_number):
         super(LogenParser, self).__init__(invoice_number)
         parser_request = ParserRequest(url='http://www.ilogen.com/homeshopping/stracker_trace_xml.asp?' \
-                             'invoice=%s' % self.invoice_number)
+                                           'invoice=%s' % self.invoice_number)
         self.add_request(parser_request)
 
     def parse(self, parser, response):
@@ -20,11 +19,11 @@ class LogenParser(Parser):
         receiver_name = getattr(tracking_info.find('reciver_name'), 'string', '')
         receiver_addr = getattr(tracking_info.find('reciver_addr'), 'string', '')
         item_name = getattr(tracking_info.find('item_name'), 'string', '')
-        if sender_name != None:
+        if sender_name is not None:
             sender_name = re.sub('[\[CDATA\]]', '', sender_name)
-        if receiver_name != None:
+        if receiver_name is not None:
             receiver_name = re.sub('[\[CDATA\]]', '', receiver_name)
-        if receiver_addr != None:
+        if receiver_addr is not None:
             receiver_addr = re.sub('[\[CDATA\]]', '', receiver_addr)
 
         parcel = Parcel()
@@ -55,5 +54,3 @@ class GTXParser(LogenParser):
         parser_request.url = 'http://www.gtxlogis.co.kr/tracking/' \
                              'tracking_xml.asp?invoice=%s' % self.invoice_number
         self.parser_request = parser_request
-
-

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Track, Parcel
 from armatis.parser import Parser, ParserRequest
 
@@ -9,7 +8,7 @@ class HanjinParser(Parser):
     def __init__(self, invoice_number):
         super(HanjinParser, self).__init__(invoice_number)
         parser_request = ParserRequest(url='http://www.hanjin.co.kr/Delivery_html/inquiry' \
-                             '/result_waybill.jsp?wbl_num=%s' % self.invoice_number)
+                                           '/result_waybill.jsp?wbl_num=%s' % self.invoice_number)
         self.add_request(parser_request)
 
     def parse(self, parser, response):
@@ -45,4 +44,3 @@ class HanjinParser(Parser):
                     track.status = status
                     track.phone1 = phone
                     self.add_track(track)
-

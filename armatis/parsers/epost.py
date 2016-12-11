@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Track, Parcel
 from armatis.parser import Parser, ParserRequest
 
@@ -10,8 +9,8 @@ class EPostParser(Parser):
         super(EPostParser, self).__init__(invoice_number)
         self.auth_key = auth_key
         parser_request = ParserRequest(url='http://openapi.epost.go.kr/trace/retrieveLongitudinalService/' \
-                             'retrieveLongitudinalService/getLongitudinalDomesticList?' \
-                             'ServiceKey=%s&rgist=%s' % (auth_key, self.invoice_number))
+                                           'retrieveLongitudinalService/getLongitudinalDomesticList?' \
+                                           'ServiceKey=%s&rgist=%s' % (auth_key, self.invoice_number))
         self.add_request(parser_request)
 
     def parse(self, parser, response):
@@ -27,18 +26,28 @@ class EPostParser(Parser):
         return_code = cmm_msg_header.find('returncode').string
         err_msg = cmm_msg_header.find('errmsg').string
 
-        addrse_nm = longitudinal_domestic_list_response.find('addrsenm').string #수취인
-        applcnt_nm = longitudinal_domestic_list_response.find('applcntnm').string   #발송인
-        dlvy_de = longitudinal_domestic_list_response.find('dlvyde').string #배달일자
-        dlvy_sttus = longitudinal_domestic_list_response.find('dlvysttus').string   #배달상태
+        # 수취인
+        addrse_nm = longitudinal_domestic_list_response.find('addrsenm').string
+        # 발송인
+        applcnt_nm = longitudinal_domestic_list_response.find('applcntnm').string
+        # 배달일자
+        dlvy_de = longitudinal_domestic_list_response.find('dlvyde').string
+        # 배달상태
+        dlvy_sttus = longitudinal_domestic_list_response.find('dlvysttus').string
 
-        longitudinal_domestic_list = longitudinal_domestic_list_response.find_all('longitudinaldomesticlist')    #종적목록
+        # 종적목록
+        longitudinal_domestic_list = longitudinal_domestic_list_response.find_all('longitudinaldomesticlist')
         for longitudinal_domestic in longitudinal_domestic_list:
-            dlvy_date = longitudinal_domestic.find('dlvydate').string #날짜
-            dlvy_time = longitudinal_domestic.find('dlvytime').string #시간
-            now_lc = longitudinal_domestic.find('nowlc').string   #현재위치
-            process_sttus = longitudinal_domestic.find('processsttus').string #처리현황
-            detail_dc = longitudinal_domestic.find('detaildc').string #상세설명
+            # 날짜
+            dlvy_date = longitudinal_domestic.find('dlvydate').string
+            # 시간
+            dlvy_time = longitudinal_domestic.find('dlvytime').string
+            # 현재위치
+            now_lc = longitudinal_domestic.find('nowlc').string
+            # 처리현황
+            process_sttus = longitudinal_domestic.find('processsttus').string
+            # 상세설명
+            detail_dc = longitudinal_domestic.find('detaildc').string
 
             time = dlvy_date + ' ' + dlvy_time
 
@@ -48,13 +57,15 @@ class EPostParser(Parser):
             track.status = process_sttus
             self.add_track(track)
 
-        pstmtr_knd = longitudinal_domestic_list_response.find('pstmtrknd').string   #우편물종류
-        rgist = longitudinal_domestic_list_response.find('rgist').string   #등기번호
-        trtmnt_se = longitudinal_domestic_list_response.find('trtmntse').string #취급구분
+        # 우편물종류
+        pstmtr_knd = longitudinal_domestic_list_response.find('pstmtrknd').string
+        # 등기번호
+        rgist = longitudinal_domestic_list_response.find('rgist').string
+        # 취급구분
+        trtmnt_se = longitudinal_domestic_list_response.find('trtmntse').string
 
         parcel = Parcel()
         parcel.sender = applcnt_nm
         parcel.receiver = addrse_nm
         parcel.note = pstmtr_knd
         self.parcel = parcel
-

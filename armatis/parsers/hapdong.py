@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Track, Parcel
 from armatis.parser import Parser, ParserRequest
 
@@ -9,7 +8,7 @@ class HapdongParser(Parser):
     def __init__(self, invoice_number):
         super(HapdongParser, self).__init__(invoice_number)
         parser_request = ParserRequest(url='http://www.hdexp.co.kr/parcel' \
-                             '/order_result_t.asp?p_item=%s' % self.invoice_number)
+                                           '/order_result_t.asp?p_item=%s' % self.invoice_number)
         self.add_request(parser_request)
 
     def parse(self, parser, response):
@@ -46,4 +45,3 @@ class HapdongParser(Parser):
                 track.status = status
                 track.phone1 = phone
                 self.add_track(track)
-

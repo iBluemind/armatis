@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Parcel, Track
 from armatis.parser import Parser, ParserRequest
 
@@ -47,4 +46,3 @@ class HyundaiParser(Parser):
                 track.location = location
                 track.status = status
                 self.add_track(track)
-

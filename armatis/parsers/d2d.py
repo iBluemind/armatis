@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Parcel, Track
 from armatis.parser import Parser, ParserRequest
 
@@ -9,8 +8,8 @@ class DoorToDoorParser(Parser):
     def __init__(self, invoice_number):
         super(DoorToDoorParser, self).__init__(invoice_number)
         parser_request = ParserRequest(url='http://www.doortodoor.co.kr/tracking/jsp/cmn/Tracking_new.jsp?' \
-                             'QueryType=3&pOrderNo=&pTelNo=&pFromDate=&pToDate=&pCustId=&' \
-                             'pageno=1&rcv_cnt=10&pTdNo=%s' % self.invoice_number)
+                                           'QueryType=3&pOrderNo=&pTelNo=&pFromDate=&pToDate=&pCustId=&' \
+                                           'pageno=1&rcv_cnt=10&pTdNo=%s' % self.invoice_number)
         self.add_request(parser_request)
 
     def parse(self, parser, response):
@@ -58,4 +57,3 @@ class DoorToDoorParser(Parser):
 class CVSNetParser(DoorToDoorParser):
     def __init__(self, invoice_number):
         super(CVSNetParser, self).__init__(invoice_number)
-

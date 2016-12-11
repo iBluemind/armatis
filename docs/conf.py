@@ -323,7 +323,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'Armatis', 'Armatis Documentation',
-     author, 'Armatis', 'Armatis parses the website or web API response of Korean parcel delivery service company for tracking the parcel.',
+     author, 'Armatis', 'Armatis parses the website or web API response of '
+                        'Korean parcel delivery service company for tracking the parcel.',
      'Miscellaneous'),
 ]
 

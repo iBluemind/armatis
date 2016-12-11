@@ -228,4 +228,3 @@ class ParserManager(object):
 
     def __len__(self):
         return len(self._parsers)
-

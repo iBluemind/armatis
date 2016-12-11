@@ -4,7 +4,7 @@
 class Company(object):
     def __init__(self, name=None, code=None, digit=None, phone=None):
         # Company's name
-        self.name =  name
+        self.name = name
         # Codename
         self.code = code
         # The digit of the invoice number
@@ -94,4 +94,3 @@ class Parcel(object):
             self.receiver,
             self.note
         )
-

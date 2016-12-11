@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Track, Parcel
 from armatis.parser import Parser, ParserRequest
 
@@ -45,4 +44,3 @@ class KGBParser(Parser):
             track.location = location
             track.phone1 = phone
             self.add_track(track)
-

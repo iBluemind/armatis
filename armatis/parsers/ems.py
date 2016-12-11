@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from armatis.models import Track, Parcel
 from armatis.parser import Parser, ParserRequest
 
@@ -9,9 +8,9 @@ class EMSParser(Parser):
     def __init__(self, invoice_number):
         super(EMSParser, self).__init__(invoice_number)
         parser_request = ParserRequest(url='http://trace.epost.go.kr/xtts/servlet/kpl.tts.common.svl.SttSVL?' \
-                             'target_command=kpl.tts.tt.epost.cmd.RetrieveOrderEpostPoEmsKorCMD' \
-                             '&JspURI=/xtts/tt/epost/ems' \
-                             '/EmsSearchResult.jsp&POST_CODE=%s' % self.invoice_number)
+                                           'target_command=kpl.tts.tt.epost.cmd.RetrieveOrderEpostPoEmsKorCMD' \
+                                           '&JspURI=/xtts/tt/epost/ems' \
+                                           '/EmsSearchResult.jsp&POST_CODE=%s' % self.invoice_number)
         self.add_request(parser_request)
 
     def parse(self, parser, response):
@@ -32,4 +31,3 @@ class EMSParser(Parser):
             track.status = status
             track.time = time
             self.add_track(track)
-

@@ -25,6 +25,7 @@ class Armatis(object):
         self.invoice_number = invoice_number
 
         self.parser_manager = ParserManager()
+
         def register_parsers():
             from armatis.parsers.d2d import DoorToDoorParser, CVSNetParser
             self.parser_manager.register_parser(Company('CJ대한통운', 'cj', 10, '1588-1255'),
@@ -64,7 +65,7 @@ class Armatis(object):
         if self.company_code is not None and \
                 self.invoice_number is not None:
             self._company, self._parser = self.parser(self.company_code,
-                                       self.invoice_number)
+                                                      self.invoice_number)
 
     def parser(self, company_code, invoice_number):
         """
@@ -101,7 +102,7 @@ class Armatis(object):
             if self.invoice_number is None:
                 raise ValueError('The invoice_number must be set first.')
             self._company, self._parser = self.parser(self.company_code,
-                                       self.invoice_number)
+                                                      self.invoice_number)
         track_result = self._parser.find()
         track_result[TRACKING_RESULT_COMPANY] = {
             'name': self._company.name,
@@ -117,4 +118,3 @@ class Armatis(object):
         :rtype: dict
         """
         return self._parser.result()
-
