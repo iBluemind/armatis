@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 
 from armatis.models import Parcel, Track
-from armatis.parser import Parser, ParserRequest
+from armatis.parser import Parser
 
 
-class HyundaiParser(Parser):
+class LotteParser(Parser):
     def __init__(self, invoice_number):
-        super(HyundaiParser, self).__init__(invoice_number)
+        super(LotteParser, self).__init__(invoice_number)
         self.requests = [
             {
-                'url': 'https://www.hlc.co.kr/home/personal/inquiry/track',
+                'url': 'https://www.lotteglogis.com/home/personal/inquiry/track',
                 'method': 'POST',
                 'body': ('InvNo=%s&action=processInvoiceSubmit' % self.invoice_number).encode('utf-8'),
                 'header': {'Content-Type': 'application/x-www-form-urlencoded'}
             },
             {
-                'url': 'https://www.hlc.co.kr/home/personal/inquiry/track',
+                'url': 'https://www.lotteglogis.com/home/personal/inquiry/track',
                 'method': 'POST',
                 'body': 'action=processInvoiceLinkSubmit'.encode('utf-8'),
                 'header': {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -38,7 +38,7 @@ class HyundaiParser(Parser):
             tds = tr.find_all('td')
             if len(tds) > 0:
                 time = '%s %s' % (getattr(tds[0], 'string', ''), getattr(tds[1], 'string', ''))
-                location = getattr(tds[2].a, 'string', '')
+                location = getattr(tds[2].a, 'string', '') or getattr(tds[2], 'string', '')
                 status = getattr(tds[3].p, 'string', '')
 
                 track = Track()

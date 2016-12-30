@@ -12,7 +12,7 @@ from armatis.constants import TRACKING_RESULT_PARCEL
 from armatis.constants import TRACKING_RESULT_TRACKS
 from armatis.parsers.d2d import DoorToDoorParser
 from armatis.parsers.hanjin import HanjinParser
-from armatis.parsers.hyundai import HyundaiParser
+from armatis.parsers.lotte import LotteParser
 from armatis.parsers.kg_logis import KGLogisParser
 from armatis.parsers.logen import LogenParser
 
@@ -33,7 +33,7 @@ class ArmatisTest(unittest.TestCase):
                          {'name': '우체국택배', 'code': 'epost'},
                          {'name': '한진택배', 'code': 'hanjin'},
                          {'name': '합동택배', 'code': 'hapdong'},
-                         {'name': '현대택배', 'code': 'hyundai'},
+                         {'name': '롯데택배', 'code': 'lotte'},
                          {'name': 'KGB택배', 'code': 'kgb'},
                          {'name': '로젠택배', 'code': 'logen'},
                          {'name': 'GTX로지스', 'code': 'gtx'},
@@ -95,19 +95,19 @@ class ArmatisTest(unittest.TestCase):
         self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'잠실2(대)')
         self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].phone1, u'01012345678')
 
-    @patch.object(HyundaiParser, '_fetch')
-    def test_hyundai_parser(self, _fetch):
+    @patch.object(LotteParser, '_fetch')
+    def test_lotte_parser(self, _fetch):
         def fetch():
-            with open('%s/hyundai.html' % DIR_MOCK_RESPONSES, 'r') as f:
+            with open('%s/lotte.html' % DIR_MOCK_RESPONSES, 'r') as f:
                 return f.read()
 
         _fetch.return_value = fetch()
-        armatis = Armatis('hyundai', 123456789123)
+        armatis = Armatis('lotte', 123456789123)
         result = armatis.find()
 
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].address, u'김포서부(대)')
         self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, u'물품을 받으셨습니다.')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].time, u'2016.10.13 --:--')
+        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].time, u'2016.12.22 --:--')
+        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'고객')
 
     @patch.object(LogenParser, '_fetch')
     def test_logen_parser(self, _fetch):

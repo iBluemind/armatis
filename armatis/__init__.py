@@ -44,9 +44,9 @@ class Armatis(object):
             from armatis.parsers.hapdong import HapdongParser
             self.parser_manager.register_parser(Company('합동택배', 'hapdong', 12, '080-873-2178'),
                                                 HapdongParser)
-            from armatis.parsers.hyundai import HyundaiParser
-            self.parser_manager.register_parser(Company('현대택배', 'hyundai', 12, '1588-2121'),
-                                                HyundaiParser)
+            from armatis.parsers.lotte import LotteParser
+            self.parser_manager.register_parser(Company('롯데택배', 'lotte', 12, '1588-2121'),
+                                                LotteParser)
             from armatis.parsers.kgb import KGBParser
             self.parser_manager.register_parser(Company('KGB택배', 'kgb', 10, '1588-4577'),
                                                 KGBParser)
