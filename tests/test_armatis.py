@@ -8,8 +8,6 @@ except:
 import os
 import unittest
 from armatis import Armatis
-from armatis.constants import TRACKING_RESULT_PARCEL
-from armatis.constants import TRACKING_RESULT_TRACKS
 from armatis.parsers.d2d import DoorToDoorParser
 from armatis.parsers.hanjin import HanjinParser
 from armatis.parsers.lotte import LotteParser
@@ -51,14 +49,14 @@ class ArmatisTest(unittest.TestCase):
         armatis = Armatis('cj', 123456789123)
         result = armatis.find()
 
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].address, u'경기도 성남시 분당구******')
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].sender, u'(주*')
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].receiver, u'한만*')
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].note, u'일반')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, u'배달완료')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].time, u'2016-10-14 16:44:35')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'분당대리점a(C15F)')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].phone1, u'분당대리점a(C15F)(031-769-0516)')
+        self.assertEqual(result['parcel'].address, u'경기도 성남시 분당구******')
+        self.assertEqual(result['parcel'].sender, u'(주*')
+        self.assertEqual(result['parcel'].receiver, u'한만*')
+        self.assertEqual(result['parcel'].note, u'일반')
+        self.assertEqual(result['tracks'][-1].status, u'배달완료')
+        self.assertEqual(result['tracks'][-1].time, u'2016-10-14 16:44:35')
+        self.assertEqual(result['tracks'][-1].location, u'분당대리점a(C15F)')
+        self.assertEqual(result['tracks'][-1].phone1, u'분당대리점a(C15F)(031-769-0516)')
 
     @patch.object(KGLogisParser, '_fetch')
     def test_kg_logis_parser(self, _fetch):
@@ -70,14 +68,14 @@ class ArmatisTest(unittest.TestCase):
         armatis = Armatis('kglogis', 123456789123)
         result = armatis.find()
 
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].address, u'서울 동작구  사당4동')
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].sender, u'한만종 님')
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].receiver, u'한*종 님')
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].note, u'일반테스트상품')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, u'고객님의 상품이 배달완료 되었습니다.')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].time, u'2016.10.18 18:24')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'동작')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].phone1, u'010-1234-5678')
+        self.assertEqual(result['parcel'].address, u'서울 동작구  사당4동')
+        self.assertEqual(result['parcel'].sender, u'한만종 님')
+        self.assertEqual(result['parcel'].receiver, u'한*종 님')
+        self.assertEqual(result['parcel'].note, u'일반테스트상품')
+        self.assertEqual(result['tracks'][-1].status, u'고객님의 상품이 배달완료 되었습니다.')
+        self.assertEqual(result['tracks'][-1].time, u'2016.10.18 18:24')
+        self.assertEqual(result['tracks'][-1].location, u'동작')
+        self.assertEqual(result['tracks'][-1].phone1, u'010-1234-5678')
 
     @patch.object(HanjinParser, '_fetch')
     def test_hanjin_parser(self, _fetch):
@@ -89,11 +87,11 @@ class ArmatisTest(unittest.TestCase):
         armatis = Armatis('hanjin', 123456789123)
         result = armatis.find()
 
-        self.assertEqual(result[TRACKING_RESULT_PARCEL].address, u'서울 송파 삼전')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, u'배송완료되었습니다.')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].time, u'2016-09-23 14:29')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'잠실2(대)')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].phone1, u'01012345678')
+        self.assertEqual(result['parcel'].address, u'서울 송파 삼전')
+        self.assertEqual(result['tracks'][-1].status, u'배송완료되었습니다.')
+        self.assertEqual(result['tracks'][-1].time, u'2016-09-23 14:29')
+        self.assertEqual(result['tracks'][-1].location, u'잠실2(대)')
+        self.assertEqual(result['tracks'][-1].phone1, u'01012345678')
 
     @patch.object(LotteParser, '_fetch')
     def test_lotte_parser(self, _fetch):
@@ -105,9 +103,9 @@ class ArmatisTest(unittest.TestCase):
         armatis = Armatis('lotte', 123456789123)
         result = armatis.find()
 
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, u'물품을 받으셨습니다.')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].time, u'2016.12.22 --:--')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'고객')
+        self.assertEqual(result['tracks'][-1].status, u'물품을 받으셨습니다.')
+        self.assertEqual(result['tracks'][-1].time, u'2016.12.22 --:--')
+        self.assertEqual(result['tracks'][-1].location, u'고객')
 
     @patch.object(LogenParser, '_fetch')
     def test_logen_parser(self, _fetch):
@@ -118,6 +116,6 @@ class ArmatisTest(unittest.TestCase):
         armatis = Armatis('logen', 12345678912)
         result = armatis.find()
 
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].status, u'배송완료')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].location, u'평택')
-        self.assertEqual(result[TRACKING_RESULT_TRACKS][-1].phone1, u'010-1234-5678')
+        self.assertEqual(result['tracks'][-1].status, u'배송완료')
+        self.assertEqual(result['tracks'][-1].location, u'평택')
+        self.assertEqual(result['tracks'][-1].phone1, u'010-1234-5678')

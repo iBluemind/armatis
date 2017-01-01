@@ -2,12 +2,14 @@
 
 
 class Company(object):
-    def __init__(self, name=None, code=None, digit=None, phone=None):
+    def __init__(self, name=None, code=None, phone=None, digit=None):
         # Company's name
         self.name = name
         # Codename
         self.code = code
         # The digit of the invoice number
+        if digit is None:
+            digit = []
         self.digit = digit
         # Phone number of the service center
         self.phone = phone

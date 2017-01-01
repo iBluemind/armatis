@@ -6,8 +6,8 @@ from armatis.parser import Parser, ParserRequest
 
 
 class LogenParser(Parser):
-    def __init__(self, invoice_number):
-        super(LogenParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(LogenParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='http://www.ilogen.com/homeshopping/stracker_trace_xml.asp?' \
                                            'invoice=%s' % self.invoice_number)
         self.add_request(parser_request)
@@ -48,9 +48,9 @@ class LogenParser(Parser):
 
 
 class GTXParser(LogenParser):
-    def __init__(self, invoice_number):
-        super(GTXParser, self).__init__(invoice_number)
-        parser_request = ParserRequest()
-        parser_request.url = 'http://www.gtxlogis.co.kr/tracking/' \
-                             'tracking_xml.asp?invoice=%s' % self.invoice_number
+    def __init__(self, invoice_number, config):
+        super(GTXParser, self).__init__(invoice_number, config)
+        parser_request = ParserRequest('http://www.gtxlogis.co.kr/tracking/' \
+                                       'tracking_xml.asp?invoice=%s' % self.invoice_number)
+        self.add_request(parser_request)
         self.parser_request = parser_request

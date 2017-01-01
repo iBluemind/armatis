@@ -5,8 +5,8 @@ from armatis.parser import Parser, ParserRequest
 
 
 class EMSParser(Parser):
-    def __init__(self, invoice_number):
-        super(EMSParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(EMSParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='http://trace.epost.go.kr/xtts/servlet/kpl.tts.common.svl.SttSVL?' \
                                            'target_command=kpl.tts.tt.epost.cmd.RetrieveOrderEpostPoEmsKorCMD' \
                                            '&JspURI=/xtts/tt/epost/ems' \

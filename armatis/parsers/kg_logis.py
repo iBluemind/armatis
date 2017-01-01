@@ -5,8 +5,8 @@ from armatis.parser import Parser, ParserRequest
 
 
 class KGLogisParser(Parser):
-    def __init__(self, invoice_number):
-        super(KGLogisParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(KGLogisParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='https://www.kglogis.co.kr/delivery/delivery_result.jsp',
                                        method='POST',
                                        body='item_no=%s' % self.invoice_number,

@@ -5,8 +5,8 @@ from armatis.parser import Parser, ParserRequest
 
 
 class HapdongParser(Parser):
-    def __init__(self, invoice_number):
-        super(HapdongParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(HapdongParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='http://www.hdexp.co.kr/parcel' \
                                            '/order_result_t.asp?p_item=%s' % self.invoice_number)
         self.add_request(parser_request)

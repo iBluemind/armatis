@@ -5,8 +5,8 @@ from armatis.parser import Parser
 
 
 class LotteParser(Parser):
-    def __init__(self, invoice_number):
-        super(LotteParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(LotteParser, self).__init__(invoice_number, config)
         self.requests = [
             {
                 'url': 'https://www.lotteglogis.com/home/personal/inquiry/track',

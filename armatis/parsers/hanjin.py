@@ -5,8 +5,8 @@ from armatis.parser import Parser, ParserRequest
 
 
 class HanjinParser(Parser):
-    def __init__(self, invoice_number):
-        super(HanjinParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(HanjinParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='http://www.hanjin.co.kr/Delivery_html/inquiry' \
                                            '/result_waybill.jsp?wbl_num=%s' % self.invoice_number)
         self.add_request(parser_request)

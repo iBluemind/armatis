@@ -8,8 +8,6 @@ from weakref import WeakValueDictionary
 from bs4 import BeautifulSoup
 import requests
 from requests import Request
-from armatis.constants import PARSER_REQUEST_HEADER_USER_AGENT, \
-    TRACKING_RESULT_PARCEL, TRACKING_RESULT_TRACKS, PARSER_REQUEST_MULTIPLE_DELAY
 from armatis.models import Parcel, Company, Tracker
 
 
@@ -46,8 +44,8 @@ class Source(object):
 
     def summary(self):
         return {
-            TRACKING_RESULT_PARCEL: self.parcel,
-            TRACKING_RESULT_TRACKS: self.tracks
+            'parcel': self.parcel,
+            'tracks': self.tracks
         }
 
 
@@ -65,8 +63,6 @@ class ParserRequest(object):
         if header is None:
             header = {}
         self.header = header
-        # Add an user agent of Internet Explorer
-        self.header['User-Agent'] = PARSER_REQUEST_HEADER_USER_AGENT
 
 
 class RequestManager(object):
@@ -74,9 +70,10 @@ class RequestManager(object):
     Provide the additional HTTP request information for browsing the API
 
     """
-    def __init__(self):
+    def __init__(self, user_agent):
         self.requests = []
         self._current = 0
+        self.user_agent = user_agent
 
     def add_request(self, new_request):
         if not isinstance(new_request, ParserRequest):
@@ -84,7 +81,9 @@ class RequestManager(object):
         self.requests.append(new_request)
 
     def _make_request(self, request):
-        return Request(request.method, request.url, data=request.body, headers=request.header)
+        headers = request.header
+        headers['User-Agent'] = self.user_agent
+        return Request(request.method, request.url, data=request.body, headers=headers)
 
     def __iter__(self):
         for request in self.requests:
@@ -96,10 +95,11 @@ class RequestManager(object):
 
 @six.add_metaclass(ABCMeta)
 class Parser(object):
-    def __init__(self, invoice_number):
+    def __init__(self, invoice_number, config):
         self.source = Source()
-        self.request_manager = RequestManager()
+        self.config = config
         self._invoice_number = invoice_number
+        self.request_manager = RequestManager(config['USER_AGENT_STRING'])
 
     @property
     def invoice_number(self):
@@ -145,7 +145,7 @@ class Parser(object):
         with requests.Session() as session:
             for index, request in enumerate(self.request_manager):
                 if index != 0:
-                    sleep(PARSER_REQUEST_MULTIPLE_DELAY)
+                    sleep(self.config['MULTIPLE_REQUEST_PERIOD'])
                 prepared = session.prepare_request(request)
                 response = session.send(prepared)
                 if index == (len(self.request_manager) - 1):

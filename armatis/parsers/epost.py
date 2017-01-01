@@ -5,17 +5,15 @@ from armatis.parser import Parser, ParserRequest
 
 
 class EPostParser(Parser):
-    def __init__(self, invoice_number, auth_key):
-        super(EPostParser, self).__init__(invoice_number)
-        self.auth_key = auth_key
+    def __init__(self, invoice_number, config):
+        super(EPostParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='http://openapi.epost.go.kr/trace/retrieveLongitudinalService/' \
                                            'retrieveLongitudinalService/getLongitudinalDomesticList?' \
-                                           'ServiceKey=%s&rgist=%s' % (auth_key, self.invoice_number))
+                                           'ServiceKey=%s&rgist=%s' %
+                                           (config['EPOST_AUTH_KEY'], self.invoice_number))
         self.add_request(parser_request)
 
     def parse(self, parser, response):
-        if self.auth_key is None:
-            raise EnvironmentError('The auth_key must be set!')
         longitudinal_domestic_list_response = parser.find('longitudinaldomesticlistresponse')
 
         cmm_msg_header = longitudinal_domestic_list_response.find('cmmmsgheader')
