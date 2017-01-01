@@ -152,12 +152,11 @@ class Parser(object):
                     return response.text
 
     @abstractmethod
-    def parse(self, parser, response):
+    def parse(self, parser):
         """
         Parse the response of the API request
 
         :param parser: The module for parsing the response
-        :param str response: The response of the API request
         """
         raise NotImplemented("Please implement the method 'parse'!")
 
@@ -190,7 +189,7 @@ class Parser(object):
     def find(self):
         response = self._fetch()
         parser = self.parser(response)
-        self.parse(parser, response)
+        self.parse(parser)
         return self.result()
 
 

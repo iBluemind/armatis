@@ -11,7 +11,7 @@ class HanjinParser(Parser):
                                            '/result_waybill.jsp?wbl_num=%s' % self.invoice_number)
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         tables = parser.find_all('tbody')
 
         if (len(tables) > 0):

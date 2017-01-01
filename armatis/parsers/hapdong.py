@@ -11,7 +11,7 @@ class HapdongParser(Parser):
                                            '/order_result_t.asp?p_item=%s' % self.invoice_number)
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         tables = parser.find_all('table', {'class': 'order_tb_result'})
 
         tds = tables[0].find_all('td')

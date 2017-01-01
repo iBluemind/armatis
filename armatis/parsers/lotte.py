@@ -22,7 +22,7 @@ class LotteParser(Parser):
             }
         ]
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         tr = parser.find('tr', {'class': 'bot'})
         tds = tr.find_all('td')
         address = tds[2].get_text(strip=True)

@@ -13,7 +13,7 @@ class EPostParser(Parser):
                                            (config['EPOST_AUTH_KEY'], self.invoice_number))
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         longitudinal_domestic_list_response = parser.find('longitudinaldomesticlistresponse')
 
         cmm_msg_header = longitudinal_domestic_list_response.find('cmmmsgheader')

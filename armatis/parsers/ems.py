@@ -13,7 +13,7 @@ class EMSParser(Parser):
                                            '/EmsSearchResult.jsp&POST_CODE=%s' % self.invoice_number)
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         div = parser.find('div', {'class': 'sub_emspop_table'})
         table = div.find('table')
         cols = table.find('thead').find('tr').find_all('th')

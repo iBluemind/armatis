@@ -10,7 +10,7 @@ class KGBParser(Parser):
         parser_request = ParserRequest(url='http://www.kgbls.co.kr/auction/?number=%s' % self.invoice_number)
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         basic_table = parser.find('table', {'class': 'view'})
         ths = basic_table.find_all('th')
         tds = basic_table.find_all('td')

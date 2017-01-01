@@ -13,7 +13,7 @@ class KGLogisParser(Parser):
                                        header={'Content-Type': 'application/x-www-form-urlencoded'})
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         basic_table = parser.find('table', {'class': 'i_table_01'})
         trs = basic_table.find_all('tr')
 

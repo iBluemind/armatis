@@ -12,7 +12,7 @@ class LogenParser(Parser):
                                            'invoice=%s' % self.invoice_number)
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         tracking_info = parser.find('tracking_info')
 
         sender_name = getattr(tracking_info.find('sender_name'), 'string', '')

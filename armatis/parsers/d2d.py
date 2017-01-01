@@ -12,7 +12,7 @@ class DoorToDoorParser(Parser):
                                            'pageno=1&rcv_cnt=10&pTdNo=%s' % self.invoice_number)
         self.add_request(parser_request)
 
-    def parse(self, parser, response):
+    def parse(self, parser):
         tables = parser.find_all('tbody')
         cols = parser.find('thead').find('tr').find_all('th')
 
