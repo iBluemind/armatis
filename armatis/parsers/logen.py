@@ -41,6 +41,7 @@ class LogenParser(Parser):
             trans_telno = getattr(tracking_details.find('trans_telno'), 'string', '')
 
             track = Track()
+            track.time = trans_time
             track.status = trans_kind
             track.location = trans_where
             track.phone1 = trans_telno

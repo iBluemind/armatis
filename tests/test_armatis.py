@@ -12,7 +12,9 @@ from armatis.parsers.d2d import DoorToDoorParser
 from armatis.parsers.hanjin import HanjinParser
 from armatis.parsers.lotte import LotteParser
 from armatis.parsers.kg_logis import KGLogisParser
-from armatis.parsers.logen import LogenParser
+from armatis.parsers.logen import LogenParser, GTXParser
+from armatis.parsers.ems import EMSParser
+from armatis.parsers.kgb import KGBParser
 
 # for python3
 if str is not bytes:
@@ -119,3 +121,42 @@ class ArmatisTest(unittest.TestCase):
         self.assertEqual(result['tracks'][-1].status, u'배송완료')
         self.assertEqual(result['tracks'][-1].location, u'평택')
         self.assertEqual(result['tracks'][-1].phone1, u'010-1234-5678')
+
+    @patch.object(KGBParser, '_fetch')
+    def test_kgb_parser(self, _fetch):
+        def fetch():
+            with open('%s/kgb.html' % DIR_MOCK_RESPONSES, 'r') as f:
+                return f.read()
+        _fetch.return_value = fetch()
+        armatis = Armatis('kgb', 1234567891)
+        result = armatis.find()
+
+        self.assertEqual(result['tracks'][-1].status, u'완료')
+        self.assertEqual(result['tracks'][-1].location, u'경기광주')
+        self.assertEqual(result['tracks'][-1].time, u'20161227 22:05:03')
+        self.assertEqual(result['tracks'][-1].phone1, u'왕** 010-1234-5678')
+
+    @patch.object(EMSParser, '_fetch')
+    def test_ems_parser(self, _fetch):
+        def fetch():
+            with open('%s/ems.html' % DIR_MOCK_RESPONSES, 'r') as f:
+                return f.read()
+        _fetch.return_value = fetch()
+        armatis = Armatis('ems', 'AA123456789BB')
+        result = armatis.find()
+
+        self.assertEqual(result['tracks'][-1].time, u'2016-12-29')
+        self.assertEqual(result['tracks'][-1].status, u'발송준비')
+
+    @patch.object(GTXParser, '_fetch')
+    def test_gtx_parser(self, _fetch):
+        def fetch():
+            with open('%s/gtx.html' % DIR_MOCK_RESPONSES, 'r') as f:
+                return f.read()
+        _fetch.return_value = fetch()
+        armatis = Armatis('gtx', 123456789123)
+        result = armatis.find()
+
+        self.assertEqual(result['tracks'][-1].status, u'배달완료')
+        self.assertEqual(result['tracks'][-1].location, u'수원')
+        self.assertEqual(result['tracks'][-1].time, u'2016.12.29 22:22')
