@@ -11,13 +11,6 @@ Subpackages
 Submodules
 ----------
 
-armatis.constants module
-------------------------
-
-.. automodule:: armatis.constants
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 armatis.models module
 ---------------------

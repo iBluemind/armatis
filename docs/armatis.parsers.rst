@@ -44,10 +44,10 @@ armatis.parsers.hapdong module
     :undoc-members:
     :show-inheritance:
 
-armatis.parsers.hyundai module
-------------------------------
+armatis.parsers.lotte module
+----------------------------
 
-.. automodule:: armatis.parsers.hyundai
+.. automodule:: armatis.parsers.lotte
     :members:
     :undoc-members:
     :show-inheritance:

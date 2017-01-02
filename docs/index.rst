@@ -87,44 +87,46 @@ Supported delivery companies
 The following delivery companies are supported currently.
 Please contributions for supporting more companies!
 
-+--------------------+------------------------+----------------+
-| Company            | Test existed           | Last Updated   |
-+====================+========================+================+
-| CJ대한통운         |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| 로젠택배           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| 현대택배           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| 한진택배           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| KG로지스           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| CVSNet편의점택배   |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| GTX로지스          |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| 우체국택배         |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| 합동택배           |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| EMS                |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
++--------------------+----------------+----------------+
+| Company            | Test existed   | Last Updated   |
++====================+================+================+
+| CJ대한통운         | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| 로젠택배           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| 현대택배           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| 한진택배           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| KG로지스           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| CVSNet편의점택배   |                | 2014-10-19     |
++--------------------+----------------+----------------+
+| GTX로지스          | o              | 2017-01-02     |
++--------------------+----------------+----------------+
+| 우체국택배         |                | 2014-10-19     |
++--------------------+----------------+----------------+
+| 합동택배           |                | 2014-10-19     |
++--------------------+----------------+----------------+
+| EMS                | o              | 2017-01-02     |
++--------------------+----------------+----------------+
+| KGB택배            | o              | 2017-01-02     |
++--------------------+----------------+----------------+
 
 You can use the method `supported_companies()` to find the supported delivery company names
 and company codes.
 
 .. code:: python
 
-      tracker = Armatis()
-      tracker.supported_companies()
+   tracker = Armatis()
+   tracker.supported_companies()
 
 `supported_companies()` returns the JSON string like ::
 
       [
          {
-             "code": "hyundai",
-             "name": "현대택배"
+             "code": "lotte",
+             "name": "롯데택배"
          },
          {
              "code": "ems",
@@ -169,6 +171,28 @@ and company codes.
       ]
 
 
+Configuration
+=============
+
+You can set global configuration like below.
+
+.. code:: python
+
+   tracker = Armatis('cj', 123456789123,
+                     user_agenet='CustomParcelTracker', period=3, validation=True)
+
+Also, this works too.
+
+.. code:: python
+
+   tracker = Armatis('cj', 123456789123,
+                     'CustomParcelTracker', 3, True)
+
+`period` is used when `Parser` has an multiple requests.
+
+If you want to check the validation of an invoice number, set `validation` `True`.
+
+
 How to add new company
 ======================
 
@@ -182,14 +206,14 @@ First, create a class which inherit `Parser`, and implement the method `parse()`
    from armatis.parser import Parser, ParserRequest
 
    class NewCompanyParser(Parser):
-       def __init__(self, invoice_number):
-           super(NewCompanyParser, self).__init__(invoice_number)
+       def __init__(self, invoice_number, config):
+           super(NewCompanyParser, self).__init__(invoice_number, config)
            # Describe the information about the website or web API provided by the delivery company
            parser_request = ParserRequest(url='http://thecompany.co.kr/tracking?invno=%s' % self.invoice_number)
            self.add_request(parser_request)
 
        # Actually occurred parsing the website or web API provided above
-       def parse(self, parser, response):
+       def parse(self, parser):
            tables = parser.find_all('tbody')
 
            parcel = Parcel()
@@ -237,6 +261,15 @@ You can also use list and dictionary!
       }
    ]
 
+If you have an issue related with character encoding, you can change the character-set like below.
+
+.. code:: python
+
+   class NewCompanyParser(Parser):
+      def __init__(self, invoice_number, config):
+         config['RESPONSE_ENCODING'] = 'cp949'
+         super(NewCompanyParser, self).__init__(invoice_number, config)
+
 And, make a `Company` instance that describe the company.
 Finally, register this `Company` object with the `Parser` class you made above.
 
@@ -247,7 +280,7 @@ Finally, register this `Company` object with the `Parser` class you made above.
    tracker = Armatis()
 
    # Make a Company instance that describe the company
-   the_new_company = Company('새로운회사', 'nc', 10, '1234-5678')
+   the_new_company = Company('새로운회사', 'nc', '1234-5678', [10, 12])
    # Register the Company object with the Parser class you made
    tracker.parser_manager.register_parser(the_new_company, NewCompanyParser)
 
@@ -298,7 +331,7 @@ Registering a new company
 
    .. attribute:: url
 
-      API endpoint
+      API endpoint which can track a parcel
 
    .. attribute:: method
 
@@ -317,6 +350,8 @@ Registering a new company
 
    .. attribute:: parcel
 
+      An instance of `Parcel`.
+
    .. automethod:: parse
 
    .. automethod:: parser
@@ -325,7 +360,9 @@ Registering a new company
 
    .. automethod:: result
 
-   .. automethod:: find
+   .. method:: find
+
+      Request API and return the result.
 
 
 .. class:: Company

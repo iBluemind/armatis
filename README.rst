@@ -5,7 +5,7 @@ Armatis
    :target: https://opensource.org/licenses/BSD-2-Clause
 .. image:: https://badge.fury.io/py/armatis.svg
    :target: https://badge.fury.io/py/armatis
-.. image:: https://travis-ci.com/iBluemind/armatis.svg?token=kCLzatyPXGgAKL1Y4CvM&branch=master
+.. image:: https://travis-ci.org/iBluemind/armatis.svg?branch=master
    :target: https://travis-ci.com/iBluemind/armatis
 .. image:: https://readthedocs.org/projects/armatis/badge/
    :target: http://armatis.readthedocs.io/en/latest/
@@ -131,29 +131,31 @@ Supported Delivery Companies
 
 The following delivery companies are supported currently.
 
-+--------------------+------------------------+----------------+
-| Company            | Test existed           | Last Updated   |
-+====================+========================+================+
-| CJ대한통운         |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| 로젠택배           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| 현대택배           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| 한진택배           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| KG로지스           |            o           | 2016-12-10     |
-+--------------------+------------------------+----------------+
-| CVSNet편의점택배   |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| GTX로지스          |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| 우체국택배         |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| 합동택배           |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
-| EMS                |                        | 2014-10-19     |
-+--------------------+------------------------+----------------+
++--------------------+----------------+----------------+
+| Company            | Test existed   | Last Updated   |
++====================+================+================+
+| CJ대한통운         | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| 로젠택배           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| 현대택배           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| 한진택배           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| KG로지스           | o              | 2016-12-10     |
++--------------------+----------------+----------------+
+| CVSNet편의점택배   |                | 2014-10-19     |
++--------------------+----------------+----------------+
+| GTX로지스          | o              | 2017-01-02     |
++--------------------+----------------+----------------+
+| 우체국택배         |                | 2014-10-19     |
++--------------------+----------------+----------------+
+| 합동택배           |                | 2014-10-19     |
++--------------------+----------------+----------------+
+| EMS                | o              | 2017-01-02     |
++--------------------+----------------+----------------+
+| KGB택배            | o              | 2017-01-02     |
++--------------------+----------------+----------------+
 
 How to add new company
 ----------------------
@@ -169,14 +171,14 @@ First, create a class which inherit ``Parser``, and implement the method
     from armatis.parser import Parser, ParserRequest
 
     class NewCompanyParser(Parser):
-        def __init__(self, invoice_number):
-            super(NewCompanyParser, self).__init__(invoice_number)
+        def __init__(self, invoice_number, config):
+            super(NewCompanyParser, self).__init__(invoice_number, config)
             # Describe the information about the website or web API provided by the delivery company 
             parser_request = ParserRequest(url='http://thecompany.co.kr/tracking?invno=%s' % self.invoice_number)
             self.add_request(parser_request)
             
         # Actually occurred parsing the website or web API provided above 
-        def parse(self, parser, response):
+        def parse(self, parser):
             tables = parser.find_all('tbody')
 
             parcel = Parcel()
@@ -207,7 +209,7 @@ First, create a class which inherit ``Parser``, and implement the method
     tracker = Armatis()
 
     # Make a Company instance that describe the company
-    the_new_company = Company('새로운회사', 'nc', 10, '1234-5678')
+    the_new_company = Company('새로운회사', 'nc', '1234-5678', [10, 12])
     # Register the Company object with the Parser class you made
     tracker.parser_manager.register_parser(the_new_company, NewCompanyParser)
 
@@ -227,4 +229,3 @@ please follow these steps:
 2. Make your changes
 3. Install the requirements using ``pip install -r requirements.txt``
 4. Submit a pull request after running ``make ready``
-

@@ -13,7 +13,7 @@ from armatis.models import Company
 from armatis.parser import ParserManager, Parser
 
 __author__ = 'Han Manjong (han@manjong.org)'
-__version__ = '1.0.2'
+__version__ = '1.1.0'
 __copyright__ = 'Copyright (c) 2016 Han Manjong'
 __license__ = 'BSD'
 

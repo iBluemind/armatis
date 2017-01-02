@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![PyPI version](https://badge.fury.io/py/armatis.svg)](https://badge.fury.io/py/armatis)
-[![Build Status](https://travis-ci.com/iBluemind/armatis.svg?token=kCLzatyPXGgAKL1Y4CvM&branch=master)](https://travis-ci.com/iBluemind/armatis)
+[![Build Status](https://travis-ci.org/iBluemind/armatis.svg?branch=master)](https://travis-ci.org/iBluemind/armatis)
 [![Read the Docs](https://readthedocs.org/projects/armatis/badge/)](http://armatis.readthedocs.io/en/latest/)
 
 :package: Armatis parses the website or web API response of Korean parcel delivery service company for tracking the parcel.
@@ -126,16 +126,17 @@ The following delivery companies are supported currently.
 
 Company | Test existed | Last Updated
 ---- | ---- | ----
-CJ대한통운 | :white_check_mark: | 2016-12-10  
-로젠택배 | :white_check_mark: | 2016-12-10  
-현대택배 | :white_check_mark: | 2016-12-10  
-한진택배 | :white_check_mark: | 2016-12-10  
-KG로지스 | :white_check_mark: | 2016-12-10  
+CJ대한통운 | o | 2016-12-10  
+로젠택배 | o | 2016-12-10  
+현대택배 | o | 2016-12-10  
+한진택배 | o | 2016-12-10  
+KG로지스 | o | 2016-12-10  
 CVSNet편의점택배 | | 2014-10-19  
-GTX로지스 | | 2014-10-19  
+GTX로지스 | o | 2017-01-02  
 우체국택배 | | 2014-10-19  
 합동택배 | | 2014-10-19  
-EMS | | 2014-10-19  
+EMS | o | 2017-01-02  
+KGB택배 | o | 2017-01-02  
 
 
 ## How to add new company
@@ -149,14 +150,14 @@ from armatis.models import Parcel, Track
 from armatis.parser import Parser, ParserRequest
 
 class NewCompanyParser(Parser):
-    def __init__(self, invoice_number):
-        super(NewCompanyParser, self).__init__(invoice_number)
+    def __init__(self, invoice_number, config):
+        super(NewCompanyParser, self).__init__(invoice_number, config)
         # Describe the information about the website or web API provided by the delivery company 
         parser_request = ParserRequest(url='http://thecompany.co.kr/tracking?invno=%s' % self.invoice_number)
         self.add_request(parser_request)
         
     # Actually occurred parsing the website or web API provided above 
-    def parse(self, parser, response):
+    def parse(self, parser):
         tables = parser.find_all('tbody')
 
         parcel = Parcel()
@@ -186,7 +187,7 @@ from armatis import Armatis, Company
 tracker = Armatis()
 
 # Make a Company instance that describe the company
-the_new_company = Company('새로운회사', 'nc', 10, '1234-5678')
+the_new_company = Company('새로운회사', 'nc', '1234-5678', [10, 12])
 # Register the Company object with the Parser class you made
 tracker.parser_manager.register_parser(the_new_company, NewCompanyParser)
 ```
