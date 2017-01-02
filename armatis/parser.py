@@ -149,6 +149,8 @@ class Parser(object):
                 prepared = session.prepare_request(request)
                 response = session.send(prepared)
                 if index == (len(self.request_manager) - 1):
+                    if self.config.get('RESPONSE_ENCODING', None):
+                        response.encoding = self.config['RESPONSE_ENCODING']
                     return response.text
 
     @abstractmethod

@@ -112,7 +112,8 @@ class ArmatisTest(unittest.TestCase):
     @patch.object(LogenParser, '_fetch')
     def test_logen_parser(self, _fetch):
         def fetch():
-            with open('%s/logen.html' % DIR_MOCK_RESPONSES, 'r') as f:
+            with open('%s/logen.html' % DIR_MOCK_RESPONSES, 'r',
+                      encoding='euc-kr') as f:
                 return f.read()
         _fetch.return_value = fetch()
         armatis = Armatis('logen', 12345678912)
@@ -151,7 +152,8 @@ class ArmatisTest(unittest.TestCase):
     @patch.object(GTXParser, '_fetch')
     def test_gtx_parser(self, _fetch):
         def fetch():
-            with open('%s/gtx.html' % DIR_MOCK_RESPONSES, 'r') as f:
+            with open('%s/gtx.html' % DIR_MOCK_RESPONSES, 'r',
+                      encoding='euc-kr') as f:
                 return f.read()
         _fetch.return_value = fetch()
         armatis = Armatis('gtx', 123456789123)

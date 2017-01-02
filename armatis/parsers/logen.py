@@ -7,6 +7,7 @@ from armatis.parser import Parser, ParserRequest
 
 class LogenParser(Parser):
     def __init__(self, invoice_number, config):
+        config['RESPONSE_ENCODING'] = 'cp949'
         super(LogenParser, self).__init__(invoice_number, config)
         parser_request = ParserRequest(url='http://www.ilogen.com/homeshopping/stracker_trace_xml.asp?' \
                                            'invoice=%s' % self.invoice_number)
