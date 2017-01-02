@@ -7,6 +7,7 @@ except:
     from mock import patch
 import os
 import unittest
+from io import open
 from armatis import Armatis
 from armatis.parsers.d2d import DoorToDoorParser
 from armatis.parsers.hanjin import HanjinParser
@@ -65,7 +66,6 @@ class ArmatisTest(unittest.TestCase):
         def fetch():
             with open('%s/kg_logis.html' % DIR_MOCK_RESPONSES, 'r') as f:
                 return f.read()
-
         _fetch.return_value = fetch()
         armatis = Armatis('kglogis', 123456789123)
         result = armatis.find()
@@ -84,7 +84,6 @@ class ArmatisTest(unittest.TestCase):
         def fetch():
             with open('%s/hanjin.html' % DIR_MOCK_RESPONSES, 'r') as f:
                 return f.read()
-
         _fetch.return_value = fetch()
         armatis = Armatis('hanjin', 123456789123)
         result = armatis.find()
@@ -100,7 +99,6 @@ class ArmatisTest(unittest.TestCase):
         def fetch():
             with open('%s/lotte.html' % DIR_MOCK_RESPONSES, 'r') as f:
                 return f.read()
-
         _fetch.return_value = fetch()
         armatis = Armatis('lotte', 123456789123)
         result = armatis.find()
