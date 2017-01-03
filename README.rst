@@ -6,7 +6,7 @@ Armatis
 .. image:: https://badge.fury.io/py/armatis.svg
    :target: https://badge.fury.io/py/armatis
 .. image:: https://travis-ci.org/iBluemind/armatis.svg?branch=master
-   :target: https://travis-ci.com/iBluemind/armatis
+   :target: https://travis-ci.org/iBluemind/armatis
 .. image:: https://readthedocs.org/projects/armatis/badge/
    :target: http://armatis.readthedocs.io/en/latest/
 
@@ -126,7 +126,7 @@ The returned data of the method ``find()`` is like below:
         ]
     }
 
-Supported Delivery Companies
+Supported delivery companies
 ----------------------------
 
 The following delivery companies are supported currently.

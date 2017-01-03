@@ -237,7 +237,7 @@ If the tracking API has multiple HTTP requests, you can also add multiple reques
 
 .. code:: python
 
-   ready_request = ParserRequest(url='http://thecompany.co.kr/track'
+   ready_request = ParserRequest(url='http://thecompany.co.kr/track',
                                  method='POST',
                                  body='invoice_number=%s' % self.invoice_number,
                                  header={'Content-Type': 'application/x-www-form-urlencoded'})
