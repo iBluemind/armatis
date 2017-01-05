@@ -176,19 +176,28 @@ You can set global configuration like below.
 
 .. code:: python
 
-   tracker = Armatis('cj', 123456789123,
-                     user_agenet='CustomParcelTracker', period=3, validation=True)
+   my_config = {
+      'USER_AGENT_STRING': 'CustomParcelTracker',
+      'MULTIPLE_REQUEST_PERIOD': 3,
+      'INVOICE_NUMBER_VALIDATION': True
+   }
+   tracker = Armatis('cj', 123456789123, config=my_config)
 
-Also, this works too.
-
-.. code:: python
-
-   tracker = Armatis('cj', 123456789123,
-                     'CustomParcelTracker', 3, True)
-
-`period` is used when `Parser` has an multiple requests.
-
-If you want to check the validation of an invoice number, set `validation` `True`.
++--------------------------------+------------+--------------------------------+
+| Name                           | Type       | Description                    |
++================================+============+================================+
+| ``USER_AGENT_STRING``          | ``str``    | The User-Agent string used on  |
+|                                |            | the delivery company's webpage |
+|                                |            | or API                         |
++--------------------------------+------------+--------------------------------+
+| ``MULTIPLE_REQUEST_PERIOD``    | ``int``    | If ``Parser`` has an multiple  |
+|                                |            | requests, this delay will be   |
+|                                |            | applied                        |
++--------------------------------+------------+--------------------------------+
+| ``INVOICE_NUMBER_VALIDATION``  | ``bool``   | Whether to check the           |
+|                                |            | validation of an invoice       |
+|                                |            | number                         |
++--------------------------------+------------+--------------------------------+
 
 
 How to add new company

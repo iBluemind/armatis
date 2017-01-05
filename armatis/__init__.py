@@ -11,9 +11,10 @@ https://github.com/iBluemind/armatis
 
 from armatis.models import Company
 from armatis.parser import ParserManager, Parser
+from six import iteritems
 
 __author__ = 'Han Manjong (han@manjong.org)'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __copyright__ = 'Copyright (c) 2016 Han Manjong'
 __license__ = 'BSD'
 
@@ -26,11 +27,10 @@ class Armatis(object):
         'INVOICE_NUMBER_VALIDATION': False,
     }
 
-    def __init__(self, company_code=None, invoice_number=None, *args, **kwargs):
+    def __init__(self, company_code=None, invoice_number=None, config=None):
         self.company_code = company_code
         self.invoice_number = invoice_number
-        self.config = self._make_config(*args) if len(args) > 0 else \
-            self._make_config(**kwargs)
+        self.config = self._make_config(config)
         self.parser_manager = ParserManager()
 
         def register_parsers():
@@ -74,14 +74,12 @@ class Armatis(object):
             self._company, self._parser = self.parser(self.company_code,
                                                       self.invoice_number)
 
-    def _make_config(self, user_agent=None, period=None, validation=None):
+    def _make_config(self, user_config=None):
         config = self.default_config
-        if user_agent:
-            config['USER_AGENT_STRING'] = user_agent
-        if period:
-            config['MULTIPLE_REQUEST_PERIOD'] = period
-        if validation:
-            config['INVOICE_NUMBER_VALIDATION'] = validation
+        if user_config is None:
+            user_config = {}
+        for k, v in iteritems(user_config):
+            config[k] = v
         return config
 
     def parser(self, company_code, invoice_number):
