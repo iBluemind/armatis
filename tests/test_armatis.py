@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from armatis.parsers.epost import EPostParser
+from armatis.parsers.hapdong import HapdongParser
 
 try:
     # for >= python 3.3
@@ -160,3 +162,30 @@ class ArmatisTest(unittest.TestCase):
         self.assertEqual(result['tracks'][-1].status, u'배달완료')
         self.assertEqual(result['tracks'][-1].location, u'수원')
         self.assertEqual(result['tracks'][-1].time, u'2016.12.29 22:22')
+
+    @patch.object(HapdongParser, '_fetch')
+    def test_hapdong_parser(self, _fetch):
+        def fetch():
+            with open('%s/hapdong.html' % DIR_MOCK_RESPONSES, 'r') as f:
+                return f.read()
+        _fetch.return_value = fetch()
+        armatis = Armatis('hapdong', 12345678912)
+        result = armatis.find()
+
+        self.assertEqual(result['tracks'][-1].status, u'배달완료')
+        self.assertEqual(result['tracks'][-1].location, u'충남금산추부563')
+        self.assertEqual(result['tracks'][-1].time, u'2017-01-03 11:08')
+        self.assertEqual(result['tracks'][-1].phone1, u'041-753-681')
+
+    @patch.object(EPostParser, '_fetch')
+    def test_epost_parser(self, _fetch):
+        def fetch():
+            with open('%s/epost.html' % DIR_MOCK_RESPONSES, 'r') as f:
+                return f.read()
+        _fetch.return_value = fetch()
+        armatis = Armatis('epost', 1234567891234)
+        result = armatis.find()
+
+        self.assertEqual(result['tracks'][-1].status, u'배달완료')
+        self.assertEqual(result['tracks'][-1].location, u'고객님의 상품이 배달완료 되었습니다.')
+        self.assertEqual(result['tracks'][-1].time, u'2016.02.03 11:46')

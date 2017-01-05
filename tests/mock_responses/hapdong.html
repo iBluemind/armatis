@@ -1,0 +1,451 @@
+
+falsefalsefalsefalsefalsefalsefalse
+
+
+<script type="text/javascript">
+  var win=null;
+  function printIt(printThis)
+  {
+    win = window.open();
+    self.focus();
+    win.document.open();
+    win.document.write('<'+'html'+'><'+'head'+'><'+'style'+'>');
+    win.document.write('body, td { font-family: Verdana; font-size: 10pt;}');
+    win.document.write('<'+'/'+'style'+'><'+'/'+'head'+'><'+'body'+'>');
+    win.document.write(printThis);
+    win.document.write('<'+'/'+'body'+'><'+'/'+'html'+'>');
+    win.document.close();
+    win.print();
+    win.close();
+  }
+</script>
+<!DOCTYPE html>
+<html lang="ko">
+      <head>
+        <meta charset="euc-kr" />
+        <title>항상 여러분과 함께하는 합동택배 입니다.</title>
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/asset/css/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/asset/css/main.css" type="text/css" media="screen" />
+        <!--[if IE 7]>
+        <link rel="stylesheet" href="/asset/css/ie7.css" type="text/css" media="screen" />
+        <![endif]-->
+        <!--[if IE 6]>
+        <link rel="stylesheet" href="/asset/css/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+
+        <!--js_start-->
+        <script type="text/javascript" src="/asset/js/jquery-1.8.1.min.js"></script>
+        <!--top_nav-->
+        <script type="text/javascript" src="/asset/js/mainvisual.js"></script>
+        <script type="text/javascript" src="/asset/js/frontlib.js"></script>
+        <script type="text/javascript" src="/asset/js/frontui.js"></script>
+        <!--//end js-->
+		<!--left_menu jqeury-->
+        <script type="text/javascript" src="/asset/js/left_menu.js"></script>
+        <!--//left_menu jqeury-->
+		<!--tab jqeury-->
+        <script type="text/javascript" src="/asset/js/history.js"></script>
+        <!--//tab jqeury-->
+
+		<!--수상내역-->
+		<script>
+            $(document).ready(function() {
+
+                //When page loads...
+                $(".tab_content").hide();
+                //Hide all content
+                $("ul.tab_awrad li:first").addClass("active").show();
+                //Activate first tab
+                $(".tab_content:first").show();
+                //Show first tab content
+
+                //On Click Event
+                $("ul.tab_awrad li").click(function() {
+
+                    $("ul.tab_awrad li").removeClass("active");
+                    //Remove any "active" class
+                    $(this).addClass("active");
+                    //Add "active" class to selected tab
+                    $(".tab_content").hide();
+                    //Hide all tab content
+
+                    var activeTab = $(this).find("a").attr("href");
+                    //Find the href attribute value to identify the active tab + content
+                    $(activeTab).show();
+                    //Fade in the active ID content
+                    return false;
+                });
+
+            });
+        </script>
+
+    </head>
+    <body>
+
+	<div id="wrap">
+            <!-- header 이 부분이 상단에 반복됩니다 -->
+            <div id="header">
+                <div class="innerWrap">
+                    <div class="centerThis group">
+                        <div class="util group">
+                            <ul>
+                                <li class="util01">
+                                    <a href="/sitemap/sitemap.asp"><img alt="sitemap" src="/asset/img/head/util01.png" /></a>
+                                </li>
+                       <!--아이디없을때-->
+                                <li class="util02">
+                                    <a href="/login/login.asp"><img alt="login" src="/asset/img/head/util02.png"/></a>
+                                </li>
+								<li class="util03">
+                                    <a href="/join/join_select.asp"><img alt="join" src="/asset/img/head/util03.png"/></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!--//util-->
+                        <h1><a href="/index.asp"><img src="/asset/img/head/logo.png" alt="합동택배로고"/></a></h1>
+                        <ul class="gnb group">
+                            <li class="gnb01">
+                                <h2><a href="/company/ceo.asp"><img src="/asset/img/nav/gnb/gnb01_off.png" alt="회사소개"/></a></h2>
+                                <ul class="depth2">
+                                    <li>
+                                        <a href="/company/ceo.asp"><img src="/asset/img/nav/gnb/gnb0101_off.png" alt="CEO인사말" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/company/vision.asp"><img src="/asset/img/nav/gnb/gnb0102_off.png" alt="기업비전" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/company/history.asp"><img src="/asset/img/nav/gnb/gnb0103_off.png" alt="회사연혁" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/company/ci.asp"><img src="/asset/img/nav/gnb/gnb0104_off.png" alt="CI소개" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/company/way.asp"><img src="/asset/img/nav/gnb/gnb0105_off.png" alt="찾아오시는길" /></a>
+                                    </li>
+                                </ul>
+                            </li>
+							<li class="gnb08">
+                                <h2><a href="/affiliate/info.asp"><img src="/asset/img/nav/gnb/gnb08_off.png" alt="계열사소개"/></a></h2>
+                                <ul class="depth2">
+                                    <li><a href="/affiliate/info.asp"><img src="/asset/img/nav/gnb/gnb0801_off.png" alt="계열사안내" /></a></li>
+                                    <li><img src="/asset/img/nav/gnb/gnb0802_off.png" alt="경동택배" /></li>
+                                    <li><img src="/asset/img/nav/gnb/gnb0803_off.png" alt="경동렌트카" /></li>
+                                    <li><img src="/asset/img/nav/gnb/gnb0804_off.png" alt="경동컨테이너창고" /></li>
+                                    <li><img src="/asset/img/nav/gnb/gnb0805_off.png" alt="합동커미셜" /></li>
+									<li><img src="/asset/img/nav/gnb/gnb0806_off.png" alt="합진운송하역" /></li>
+									<li><img src="/asset/img/nav/gnb/gnb0807_off.png" alt="평해전산용역정산" /></li>
+									<li><img src="/asset/img/nav/gnb/gnb0808_off.png" alt="해종전산광고용역" /></li>
+									<li><img src="/asset/img/nav/gnb/gnb0809_off.png" alt="케이에스씨비(주)" /></li>
+                                </ul>
+                            </li>
+                            <li class="gnb02">
+                                <h2><a href="/business/distribution.asp"><img src="/asset/img/nav/gnb/gnb02_off.png" alt="사업영역"/></a></h2>
+                                <ul class="depth2">
+                                    <li>
+                                        <a href="/business/distribution.asp"><img src="/asset/img/nav/gnb/gnb0201_off.png" alt="택배사업" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/business/container.asp"><img src="/asset/img/nav/gnb/gnb0202_off.png" alt="컨테이너보관창고" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/business/commercial.asp"><img src="/asset/img/nav/gnb/gnb0203_off.png" alt="커머셜" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/business/warehouse.asp"><img src="/asset/img/nav/gnb/gnb0204_off.png" alt="보세창고" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/business/terminal.asp"><img src="/asset/img/nav/gnb/gnb0205_off.png" alt="전국터미널" /></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gnb03">
+                                <h2><a href="/service/delivery_standard.asp"><img src="/asset/img/nav/gnb/gnb03_off.png" alt="서비스안내"/></a></h2>
+                                <ul class="depth2">
+                                    <li>
+                                        <a href="/service/delivery_standard.asp"><img src="/asset/img/nav/gnb/gnb0301_off.png" alt="택배표준약관" /></a>
+                                    </li>
+                                    <!--<li>
+                                        <a href="javascript:alert('준비중입니다.');"><img src="/asset/img/nav/gnb/gnb0302_off.png" alt="요금안내" /></a>
+                                    </li>-->
+									<li>
+                                        <a href="/service/fees.asp"><img src="/asset/img/nav/gnb/gnb0302_off.png" alt="요금안내" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/service/insurance.asp"><img src="/asset/img/nav/gnb/gnb0303_off.png" alt="소화물(택배)보험" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/service/mobile.asp"><img src="/asset/img/nav/gnb/gnb0304_off.png" alt="모바일서비스" /></a>
+                                    </li>
+									 <li>
+                                        <a href="/service/economy.asp"><img src="/asset/img/nav/gnb/gnb0305_off.png" alt="12대경재력" /></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gnb04">
+                                <h2><a href="/entrepreneurship_guide/procedures.asp"><img src="/asset/img/nav/gnb/gnb04_off.png" alt="영업소개설문의"/></a></h2>
+                                <ul class="depth2">
+                                    <li>
+                                        <a href="/entrepreneurship_guide/procedures.asp"><img src="/asset/img/nav/gnb/gnb0401_off.png" alt="개설가이드" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/board/default.asp?checkt=counsel"><img src="/asset/img/nav/gnb/gnb0402_off.png" alt="개설상담" /></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gnb05">
+                                <h2><a href="/board/default.asp?checkt=94"><img src="/asset/img/nav/gnb/gnb05_off.png" alt="고객지원"/></a></h2>
+                                <ul class="depth2">
+                                     <li>
+                                        <a href="/board/default.asp?checkt=94"><img src="/asset/img/nav/gnb/gnb0501_off.png" alt="공지사항" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/board/default.asp?checkt=02"><img src="/asset/img/nav/gnb/gnb0502_off.png" alt="자주하는질문" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="/customer/store.asp"><img src="/asset/img/nav/gnb/gnb0503_off.png" alt="영업점안내" /></a>
+                                    </li>
+                                </ul>
+                            </li>
+                             <li class="gnb06">
+                                <h2><a href="/login/login.asp"><img src="/asset/img/nav/gnb/gnb06_off.png" alt="기업고객서비스"/></a></h2>
+                                <ul class="depth2">
+                                     <li>
+                                        <a href="/business/data_management.asp"><img src="/asset/img/nav/gnb/gnb0601_off.png" alt="기업고객로그인" /></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gnb07">
+                                <h2><a href="/parcel/order_status.asp"><img src="/asset/img/nav/gnb/gnb07_off.png" alt="택배서비스"/></a></h2>
+                                <ul class="depth2">
+                                     <li>
+                                        <a href="/parcel/order_status.asp"><img src="/asset/img/nav/gnb/gnb0701_off.png" alt="배송조회" /></a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul><!-- // lnb -->
+
+                    </div>
+                    <!-- // centerThis -->
+                </div>
+                <!-- // innerWrap -->
+            </div><!-- // header -->
+        </div><!-- //  wrap -->
+        <section>
+            <div class="group centerThis">
+                <div class="sub_top_banner">
+                    <img src="/asset/img/sub/top_banner/parcel.jpg" alt="택배서비스배너이미지">
+                </div>
+                <!--//.sub_top_banner-->
+                <div class="sub_section group">
+                    <div class="sub_lt_sec">
+                        <h2><img src="/asset/img/sub/left_title/lt_parcel.gif" alt="택배 서비스"/></h2>
+                        <div class="left_nav">
+                            <ul class="">
+                                <li>
+                                    <a href="/parcel/order_status.asp"><img src="/asset/img/sub/left_nav/parcel_m1_on.gif" alt="배송조회"/></a>
+                                </li>
+                                <!--<li>
+                                    <a href="/board/default.asp?checkt=notice"><img src="/asset/img/sub/left_nav/parcel_m2.gif" alt="로그인"/></a>
+                                </li>-->
+                            </ul>
+                        </div>
+                        <!--//.left_nav-->
+                    </div>
+                    <!--//.sub_lt_sec-->
+                    <div class="sub_rt_sec">
+                        <h2><img src="/asset/img/sub/right_title/rt_parcel_1.gif" alt="배송 조회"/></h2>
+                        <div class="sub_area_info">
+                            <a href=""><span class="home"><img src="/asset/img/deco/deco_home.gif" alt="홈으로" /></span></a> > <a href="">택배서비스</a> > <span class="blue_font">배송조회</span>
+                        </div>
+                        <!--//.sub_area_info-->
+                        <div class="description_info_talk order_talk">
+                            <div class="info_talk_img">
+                                <p>
+                                    <img src="/asset/img/sub/parcel/talk_1.gif" alt="합동택배 온라인 배송조회" />
+                                </p>
+                                <p>
+                                    <img src="/asset/img/sub/parcel/talk_2.gif" alt="온라인으로 택배 및 화물의 현재위치를 조회하실 수 있습니다." />
+                                </p>
+                            </div>
+                            <!--//.info_talk_img-->
+                        </div>
+                        <!--//.description_info_talk-->
+<div id="printme">
+
+                        <div class="order_box">
+                            <div class="order_div">
+                                <table class="order_tb_result" width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                      <tr>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>발송영업소</font></th>
+                                            <td width="265" bgcolor='#ffffff'>서울마포토정3</td>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>도착영업소</font></th>
+                                            <td width="265" bgcolor='#ffffff'>충남금산추부563</td>
+                                        </tr>
+										<tr>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>발송영업소tel</font></th>
+                                            <td width="265" bgcolor='#ffffff'>02-713-6261</td>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>도착영업소tel </font></th>
+                                            <td width="265"bgcolor='#ffffff'>041-753-681</td>
+                                        </tr>
+										<tr>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>보낸분</font></th>
+                                            <td width="265" bgcolor='#ffffff' >한***</td>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>받는분</font></th>
+                                            <td width="265" bgcolor='#ffffff' >한***</td>
+                                        </tr>
+										<tr>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>보낸분tel</font></th>
+                                            <td width="265" bgcolor='#ffffff'>&nbsp;</td>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>받는분tel</font></th>
+                                            <td width="265" bgcolor='#ffffff'>010-8***</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>보낸분주소</font></th>
+                                            <td width="265" bgcolor='#ffffff'> ***</td>
+                                            <td width="100" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>받는분주소</font></th>
+                                            <td width="265" bgcolor='#ffffff'>***</td>
+                                        </tr>
+                                </table>
+                            </div>
+                            <!--//.order_div-->
+                            <div class="order_div">
+                                <table class="order_tb_result" width="100%" border="0" cellpadding="0" cellspacing="0">
+
+                                        <tr>
+										    <td width="182" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>발송일</font></th>
+                                            <td width="182"bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>운송장번호</font></th>
+                                            <td width="182" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>운송구분</font></th>
+											<td width="182" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>물품명</font></th>
+                                            <td width="182" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>포장</font></th>
+                                            <td width="184" bgcolor='#FFD700'>&nbsp;&nbsp;<font
+											color='#000000'>수량</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="center" bgcolor='#ffffff'>2017-01-02</td>
+                                            <td class="center" bgcolor='#ffffff'>12345678912</td>
+											<td class="center" bgcolor='#ffffff'>택현</td>
+											<td class="center" bgcolor='#ffffff'>휴대폰악세사리</td>
+                                            <td class="center" bgcolor='#ffffff'>박스</td>
+                                            <td class="center" bgcolor='#ffffff'>10</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="info">
+
+                                </p>
+                            </div>
+                            <!--//.order_div-->
+                            <div class="order_div">
+                                <table class="order_tb_result" width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td width="120" bgcolor='#FFD700'><font
+											color='#000000'>날짜</font></th>
+                                            <td width="200" bgcolor='#FFD700'><font
+											color='#000000'>처리점소</font></th>
+                                            <td width="120" bgcolor='#FFD700'><font
+											color='#000000'>연락처</font></th>
+                                            <td width="290" bgcolor='#FFD700'><font
+											color='#000000'>처리현황</font></th>
+                                        </tr>
+
+                                      <tr>
+                                       <td class="center">2017-01-02 17:44</td>
+                                       <td class="center">서울마포토정3</td>
+									   <td class="center">02-713-6261</td>
+                                       <td class="center">접수완료</td>
+                                      </tr>
+
+                                        <tr>
+                                            <td class="center">2017-01-03 11:08</td>
+                                            <td class="center">충남금산추부563</td>
+                                            <td class="center">041-753-681</td>
+                                            <td class="center">배달완료</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+<table width="900" border="0" align="center">
+<tr>
+<td align="center">
+<a href="javascript:printIt(document.getElementById('printme').innerHTML)"><img src="/admin/images/print1.gif" border=0 align='absmiddle'></a>
+</td>
+</tr>
+</table>
+                                <p class="back">
+                                     <input type="button" name="" value="이전화면" class="btn_black_type" onclick="javascript:location.href='order_status_t.asp';">
+                                </p>
+                            </div>
+                            <!--//.order_div-->
+                        </div>
+                        <!--//.order_box-->
+						</div><!--printme-->
+                    </div>
+                    <!--//.sub_rt_sec-->
+                </div>
+                <!--//.sub_section-->
+            </div>
+            <!--//.centerThis-->
+        </section>
+
+<footer>
+            <div class="centerThis clearFix group">
+                <ul class="foot_link">
+                    <li class="bg_none" style="padding-left: 0px;">
+                       <a href="http://www.hdexp.co.kr/login/person_standard_1.1.asp" class="black_3d bold">개인정보취급방침</a>
+                    </li>
+                    <li>
+					   <a href="http://www.hdexp.co.kr/company/vision.asp">회사소개</a>
+					</li>
+                    <!--<li>
+                       <a href="http://www.hdexp.co.kr/board/default.asp?checkt=01">고객의 소리</a>
+                    </li>-->
+                    <li>
+                        <a href="http://www.hdexp.co.kr/service/delivery_standard.asp">택배표준약관</a>
+                    </li>
+                </ul>
+                <!--//end .foot_link-->
+                <address>
+                    <p>
+                        <strong>(주)합동택배</strong> 경기도 군포시 부곡동 451번지 복합화물터미널(나)동 2층  대표 백영창
+                    </p>
+                    <p>
+                        개인정보책임자 김남규
+                    </p>
+                    <p>
+                        Copyright &copy; HAPDONG Corp. ALL RIGHTS RESERVED.
+                    </p>
+                </address>
+                <!--<img src="/asset/img/footer/mark01.gif" alt="친환경" class="footer_mark01"/>
+                <img src="/asset/img/footer/mark02.gif" alt="AAAA" class="footer_mark02"/>
+                <img src="/asset/img/footer/mark03.gif" alt="NIPA" class="footer_mark03"/>
+                <img src="/asset/img/footer/mark04.gif" alt="ICR" class="footer_mark04"/>-->
+                <img src="/asset/img/footer/mark.jpg" alt="친환경" class="footer_mark04"/>
+            </div>
+            <!--//end .centerThis-->
+        </footer>
+
+    </body>
+</html>

@@ -126,15 +126,14 @@ The following delivery companies are supported currently.
 
 Company | Test existed | Last Updated
 ---- | ---- | ----
-CJ대한통운 | :white_check_mark: | 2016-12-10  
+CJ대한통운, CVSNet편의점택배 | :white_check_mark: | 2016-12-10  
 로젠택배 | :white_check_mark: | 2016-12-10  
 현대택배 | :white_check_mark: | 2016-12-10  
 한진택배 | :white_check_mark: | 2016-12-10  
 KG로지스 | :white_check_mark: | 2016-12-10  
-CVSNet편의점택배 | | 2014-10-19  
 GTX로지스 | :white_check_mark: | 2017-01-02  
-우체국택배 | | 2014-10-19  
-합동택배 | | 2014-10-19  
+우체국택배 | :white_check_mark: | 2017-01-06  
+합동택배 | :white_check_mark: | 2017-01-06  
 EMS | :white_check_mark: | 2017-01-02  
 KGB택배 | :white_check_mark: | 2017-01-02  
 
