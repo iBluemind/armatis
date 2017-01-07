@@ -38,7 +38,7 @@ setup(
         'Programming Language :: Python :: 3.5'
     ],
     keywords='parcel delivery korea',
-    packages=find_packages(exclude=['sphinx', 'docs', 'tests']),
+    packages=find_packages(exclude=['docs', 'tests']),
     install_requires=[
         'requests',
         'beautifulsoup4',
