@@ -47,7 +47,6 @@ class DoorToDoorParser(Parser):
             track = Track()
             track.location = location
             track.phone1 = phone1
-            track.phone2 = phone2
             track.status = status
             track.time = time
             self.add_track(track)
