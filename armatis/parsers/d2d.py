@@ -41,14 +41,12 @@ class DoorToDoorParser(Parser):
 
             location = getattr(tds[0], 'get_text', '')(strip=True)
             phone1 = getattr(tds[1], 'get_text', '')(strip=True)
-            phone2 = getattr(tds[6], 'get_text', '')(strip=True)
             status = getattr(tds[2], 'get_text', '')(strip=True)
             time = getattr(tds[3], 'get_text', '')(strip=True)
 
             track = Track()
             track.location = location
             track.phone1 = phone1
-            track.phone2 = phone2
             track.status = status
             track.time = time
             self.add_track(track)
