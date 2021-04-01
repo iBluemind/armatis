@@ -1,5 +1,5 @@
 requests==2.20.0
-lxml==3.6.4
+lxml==4.6.3
 beautifulsoup4==4.4.1
 six==1.10.0
 Flask-Sphinx-Themes==1.0.1
